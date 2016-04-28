@@ -55,6 +55,7 @@ public class VueProduit extends JFrame implements ActionListener
 	//contruction des objet rechercher
 	private JLabel lbRechercher = new JLabel("Recherche d'un produit");
 	private JButton btOk = new JButton("Ok");
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbxProduit = new JComboBox();
 	private JTextArea taResultat = new JTextArea("Résultat : ");
 	
@@ -374,6 +375,7 @@ public class VueProduit extends JFrame implements ActionListener
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void remplixCBX()
 	{
 		this.cbxProduit.removeAllItems();
