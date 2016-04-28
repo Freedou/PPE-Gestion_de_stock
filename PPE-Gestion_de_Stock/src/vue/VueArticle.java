@@ -1,7 +1,8 @@
 package vue;
 
 import controleur.Article;
-import controleur.Produit;
+
+
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -40,38 +41,41 @@ public class VueArticle extends JFrame implements ActionListener
 	private JButton btQuitter = new JButton("Quitter");
 	
 	//construction des objet ajouter
-	private JTextField tfReference = new JTextField("");
-	private JTextField tfDesignation= new JTextField("");
-	private JTextField tfPrix = new JTextField("");
+	private JTextField tfId = new JTextField("");
+	private JTextField tfId_famille= new JTextField("");
+	private JTextField tfId_sous_famille= new JTextField("");
+	private JTextField tfNom = new JTextField("");
+	private JTextField tfCode_article = new JTextField("");
+	private JTextField tfDesignation = new JTextField("");
+	private JTextField tfPrix_unitaire = new JTextField("");
 	private JTextField tfQuantite = new JTextField("");
-	private JTextField tfCategorie = new JTextField("");
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btEnregistrer = new JButton("Enregistrer");
 	
 	//construction des objet lister
-	private JLabel lbLister= new JLabel("Liste des produits");
+	private JLabel lbLister= new JLabel("Liste des articles");
 	private JButton btFermer = new JButton("Fermer");
-	private JTable tabProduits = null;
+	private JTable tabArticles = null;
 	
 	//contruction des objet rechercher
-	private JLabel lbRechercher = new JLabel("Recherche d'un produit");
+	private JLabel lbRechercher = new JLabel("Recherche d'un article");
 	private JButton btOk = new JButton("Ok");
 	@SuppressWarnings("rawtypes")
-	private JComboBox cbxProduit = new JComboBox();
+	private JComboBox cbxArticle = new JComboBox();
 	private JTextArea taResultat = new JTextArea("Résultat : ");
 	
 	//construction des objet supprimer
-	private JLabel lbSuppr = new JLabel("Supprimer des produits");
+	private JLabel lbSuppr = new JLabel("Supprimer des articles");
 	private JTextField tfRecherche = new JTextField();
 	private JButton btSuppr = new JButton("Supprimer");
-	private JTextArea taNbobj = new JTextArea("Nombre de produits : ");
+	private JTextArea taNbobj = new JTextArea("Nombre d'articles : ");
 	
 	//ajout d'un background
 	private JLabel monBackground = new JLabel(new ImageIcon("C:/Users/Joffray/Desktop/Background.jpg"));
 	
 	public VueArticle()
 	{
-		this.setTitle("Gestion de stock");
+		this.setTitle("Gestion de stocks");
 		this.setBounds(200,200,650,400);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -105,16 +109,22 @@ public class VueArticle extends JFrame implements ActionListener
 		this.panelAjouter.setBounds(140, 10, 500, 340);
 		this.panelAjouter.setBackground(Color.cyan);
 		this.panelAjouter.setLayout(new GridLayout(7,2));
-		this.panelAjouter.add(new JLabel("Référence :"));
-		this.panelAjouter.add(this.tfReference);
+		this.panelAjouter.add(new JLabel("id :"));
+		this.panelAjouter.add(this.tfId);
+		this.panelAjouter.add(new JLabel("id_famille :"));
+		this.panelAjouter.add(this.tfId_famille);
+		this.panelAjouter.add(new JLabel("id_sous_famille :"));
+		this.panelAjouter.add(this.tfId_sous_famille);
+		this.panelAjouter.add(new JLabel("nom :"));
+		this.panelAjouter.add(this.tfNom);
+		this.panelAjouter.add(new JLabel("Code_article :"));
+		this.panelAjouter.add(this.tfCode_article);
 		this.panelAjouter.add(new JLabel("Designation:"));
 		this.panelAjouter.add(this.tfDesignation);
-		this.panelAjouter.add(new JLabel("Prix :"));
-		this.panelAjouter.add(this.tfPrix);
+		this.panelAjouter.add(new JLabel("Prix_unitaire :"));
+		this.panelAjouter.add(this.tfPrix_unitaire);
 		this.panelAjouter.add(new JLabel("Quantité :"));
 		this.panelAjouter.add(this.tfQuantite);
-		this.panelAjouter.add(new JLabel("Catégorie :"));
-		this.panelAjouter.add(this.tfCategorie);
 		this.panelAjouter.add(this.btAnnuler);
 		this.panelAjouter.add(this.btEnregistrer);
 		this.panelAjouter.setVisible(false);
@@ -137,8 +147,8 @@ public class VueArticle extends JFrame implements ActionListener
 		this.panelRechercher.setLayout(null);
 		this.lbRechercher.setBounds(100, 20, 200, 20);
 		this.panelRechercher.add(this.lbRechercher);
-		this.cbxProduit.setBounds(50, 80, 200, 20);
-		this.panelRechercher.add(this.cbxProduit);
+		this.cbxArticle.setBounds(50, 80, 200, 20);
+		this.panelRechercher.add(this.cbxArticle);
 		this.btOk.setBounds(260, 80, 80, 20);
 		this.panelRechercher.add(this.btOk);
 		this.taResultat.setBounds(100, 120, 300, 150);
@@ -174,13 +184,13 @@ public class VueArticle extends JFrame implements ActionListener
 		this.setVisible(true);
 	}
 	
-	public static void afficherProduits (String chaine)
+	public static void afficherArticle (String chaine)
 	{
-		System.out.println("Les produitsde la bdd");
+		System.out.println("Les articles de la bdd");
 		System.out.println(chaine);
 	}
 	
-	public static Article saisirProduit()
+	public static Article saisirArticle()
 	{
 		Article unArticle = new Article();
 		System.out.println("Donner l'id : ");
@@ -236,7 +246,7 @@ public class VueArticle extends JFrame implements ActionListener
 				this.panelLister.setVisible(true);
 				this.panelRechercher.setVisible(false);
 				this.panelSupprimer.setVisible(false);
-				String titres[] = {"Référence", "Désignation", "Prix", "Qantité", "Catégorie"};
+				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
 				Object donnees [][] = new Object[uneListe.size()][5];
 				int i = 0;
@@ -252,8 +262,8 @@ public class VueArticle extends JFrame implements ActionListener
 					donnees[i][7]=unArticle.getQuantite();
 					i++;
 				}
-				this.tabProduits = new JTable(donnees, titres);
-				JScrollPane uneScroll = new JScrollPane(this.tabProduits);
+				this.tabArticles = new JTable(donnees, titres);
+				JScrollPane uneScroll = new JScrollPane(this.tabArticles);
 				uneScroll.setBounds(20, 50, 400, 220);
 				uneScroll.setVisible(true);
 				this.panelLister.add(uneScroll);
@@ -291,30 +301,67 @@ public class VueArticle extends JFrame implements ActionListener
 						{
 							if(e.getSource()==this.btAnnuler)
 							{
-								this.tfReference.setText("");
+								this.tfId.setText("");
+								this.tfId_famille.setText("");
+								this.tfId_sous_famille.setText("");
+								this.tfNom.setText("");
+								this.tfCode_article.setText("");
 								this.tfDesignation.setText("");
-								this.tfPrix.setText("");
+								this.tfPrix_unitaire.setText("");
 								this.tfQuantite.setText("");
 							}
 							else
 							{
 								if(e.getSource()==this.btEnregistrer)
 								{
-									String reference = this.tfReference.getText();
+									int id = 0;
+									int id_famille = 0;
+									int id_sous_famille = 0;
+									String nom = this.tfNom.getText();
+									String code_article = this.tfCode_article.getText();
 									String designation = this.tfDesignation.getText();
-									//String categorie = this.tfCategorie.getText();
 									float prix_unitaire = 0;
 									int quantite = 0;
 									boolean ok=true;
 									try{
-										prix_unitaire=Float.parseFloat(this.tfPrix.getText());
-										this.tfQuantite.setBackground(Color.white);
+										id=Integer.parseInt(this.tfId.getText());
+										this.tfId.setBackground(Color.white);
 									}
 									catch(Exception exp)
 									{
 										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie du prix");
-										this.tfQuantite.setBackground(Color.red);
+										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id");
+										this.tfId.setBackground(Color.red);
+									}
+									try{
+										id_famille=Integer.parseInt(this.tfId_famille.getText());
+										this.tfId_famille.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id_famille");
+										this.tfId_famille.setBackground(Color.red);
+									}
+									try{
+										id_sous_famille=Integer.parseInt(this.tfId_sous_famille.getText());
+										this.tfId_sous_famille.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id_sous_famille");
+										this.tfId_sous_famille.setBackground(Color.red);
+									}
+									try{
+										prix_unitaire=Float.parseFloat(this.tfPrix_unitaire.getText());
+										this.tfPrix_unitaire.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										JOptionPane.showMessageDialog(this, "Erreur de saisie du prix_unitaire");
+										this.tfPrix_unitaire.setBackground(Color.red);
 									}
 									try{
 										quantite = Integer.parseInt(this.tfQuantite.getText());
@@ -329,8 +376,7 @@ public class VueArticle extends JFrame implements ActionListener
 									try{
 										if(ok == true)
 										{
-											Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, 
-													designation, prix_unitaire, quantite);
+											Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite);
 											Modele.insertArticle(unArticle);
 											JOptionPane.showMessageDialog(this, "Insertion réussi !");
 											this.panelAjouter.setVisible(false);
@@ -338,7 +384,7 @@ public class VueArticle extends JFrame implements ActionListener
 									}
 									catch(Exception exp)
 									{
-										JOptionPane.showMessageDialog(this, "Erreur lors de l'insertion du produit");
+										JOptionPane.showMessageDialog(this, "Erreur lors de l'insertion de l'article");
 									}
 								}
 								else
@@ -351,10 +397,10 @@ public class VueArticle extends JFrame implements ActionListener
 									{
 										if(e.getSource()==this.btOk)
 										{
-											String chaine = this.cbxProduit.getSelectedItem().toString();
+											String chaine = this.cbxArticle.getSelectedItem().toString();
 											String tab[] = new String [5];
 											tab = chaine.split(" - ");
-											chaine = "\n\tRéférence : " +tab[0]+"\n\tDésignation : " +tab[1]+"\n\tPrix : " +tab[2]+"\n\tQuantité : " +tab[3]+"\n\tCatégorie : " +tab[4];
+											chaine = "\n\tId : " +tab[0]+"\n\tId_famille : " +tab[1]+"\n\tId_sous_famille : " +tab[2]+"\n\tNom : " +tab[3]+"\n\tCode_article : " +tab[4]+"\n\tDesignation : " +tab[5]+"\n\tPrix_unitaire : " +tab[6]+"\n\tQuantite : " +tab[7];
 											this.taResultat.setText(chaine);
 										}
 										else
@@ -364,19 +410,19 @@ public class VueArticle extends JFrame implements ActionListener
 												String cle = this.tfRecherche.getText();
 												if(!cle.equals(""))
 												{
-													int nb = Modele.deleteProduits(this.tfRecherche.getText());
+													int nb = Modele.deleteArticles(this.tfRecherche.getText());
 													if(nb!=0)
 													{
-														this.taNbobj.setText("Nombre de produits supprimer : "+nb);
+														this.taNbobj.setText("Nombre d'articles supprimer : "+nb);
 													}
 													else
 													{
-														this.taNbobj.setText("Aucun produit ne correspond à votre recherche.");
+														this.taNbobj.setText("Aucun article ne correspond à votre recherche.");
 													}
 												}
 												else
 												{
-													this.taNbobj.setText("Vous devez renseigner un nom de produit.");
+													this.taNbobj.setText("Vous devez renseigner un nom d'article.");
 												}
 											}
 										}
@@ -393,11 +439,11 @@ public class VueArticle extends JFrame implements ActionListener
 	@SuppressWarnings("unchecked")
 	private void remplixCBX()
 	{
-		this.cbxProduit.removeAllItems();
+		this.cbxArticle.removeAllItems();
 		LinkedList<Article> uneListe = Modele.selectAll();
 		for(Article unArticle : uneListe)
 		{
-			this.cbxProduit.addItem(unArticle.toString());
+			this.cbxArticle.addItem(unArticle.toString());
 		}
 	}
 }//fin de la classe
