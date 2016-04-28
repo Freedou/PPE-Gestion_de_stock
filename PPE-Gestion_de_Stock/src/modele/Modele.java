@@ -1,32 +1,35 @@
 package modele;
 
 import java.util.LinkedList;
-import controleur.Produit;
+import controleur.Article;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Modele {
     
-    public static LinkedList<Produit> selectAll ()
+    public static LinkedList<Article> selectAll ()
     {
-        LinkedList<Produit> uneListe = new LinkedList<Produit>();
-        BDD uneBDD = new BDD("localhost", "stock", "root", "");
+        LinkedList<Article> uneListe = new LinkedList<Article>();
+        BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="Select * from produit;";
+        String requete ="Select * from articles;";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
             while (unRes.next())
             {
-                String reference = unRes.getString("reference");
+                int id = unRes.getInt("id");
+                int id_famille = unRes.getInt("id_famille");
+                int id_sous_famille = unRes.getInt("id_sous_famille");
+                String nom = unRes.getString("nom");
+                String code_article = unRes.getString("code_article");
                 String designation = unRes.getString("designation");
-                String categorie = unRes.getString("categorie");
-                float prix = unRes.getFloat("prix");
-                int qte = unRes.getInt("qte");
-                Produit unProd = new Produit (reference, designation, categorie, prix, qte);
-                uneListe.add(unProd);
+                float prix_unitaire = unRes.getFloat("prix_unitaire");
+                int quantite = unRes.getInt("quantite");
+                Article unArticle = new Article (id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite);
+                uneListe.add(unArticle);
                 
             }
             unStat.close();
@@ -41,10 +44,10 @@ public class Modele {
         return uneListe;
     }
     
-    public static void insertProduit(Produit unProd)
+    public static void insertProduit(Article unArticle)
     {
-        //inserer un produit dans la table produit
-        String requete ="insert into produit(reference, designation," + "prix, qte, categorie) values ('"+unProd.getReference()+"','"+unProd.getDesignation()+"',"+unProd.getPrix()+","+unProd.getQte()+",'"+unProd.getCategorie()+"');";
+        //inserer un produit dans la table articles
+        String requete ="insert into articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) values ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"',"+unArticle.getId_sous_famille()+","+unArticle.getNom()+",'"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";
         BDD uneBDD = new BDD ("localhost", "stock", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -60,10 +63,10 @@ public class Modele {
         uneBDD.seDeconnecter();
     }
     
-    public static LinkedList<Produit> selectWhere (String cle)
+    public static LinkedList<Article> selectWhere (String cle)
     {
         //select where designation etc.
-        LinkedList<Produit> uneListe = new LinkedList<Produit>();
+        LinkedList<Article> uneListe = new LinkedList<Article>();
         BDD uneBDD = new BDD ("localhost", "stock", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -73,13 +76,16 @@ public class Modele {
             ResultSet unRes = unStat.executeQuery(requete);
             while (unRes.next())
             {
-                String reference = unRes.getString("reference");
+            	int id = unRes.getInt("id");
+                int id_famille = unRes.getInt("id_famille");
+                int id_sous_famille = unRes.getInt("id_sous_famille");
+                String nom = unRes.getString("nom");
+                String code_article = unRes.getString("code_article");
                 String designation = unRes.getString("designation");
-                String categorie = unRes.getString("categorie");
-                float prix = unRes.getFloat("prix");
-                int qte = unRes.getInt("qte");
-                Produit unProd = new Produit (reference, designation, categorie, prix, qte);
-                uneListe.add(unProd);
+                float prix_unitaire = unRes.getFloat("prix_unitaire");
+                int quantite = unRes.getInt("quantite");
+                Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite);
+                uneListe.add(unArticle);
                 
             }
             unStat.close();
