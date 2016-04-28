@@ -9,23 +9,29 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import controleur.Produit;
+
 public class FicheProduit extends JFrame implements ActionListener, KeyListener
 {
 	//construction de la fiche produit
-	private JTextField tfReference = new JTextField("");
-	private JTextField tfDesignation= new JTextField("");
-	private JTextField tfPrix = new JTextField("");
-	private JTextField tfQuantite = new JTextField("");
-	private JTextField tfCategorie = new JTextField("");
-	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btEnregistrer = new JButton("Enregistrer");
-	private JButton btSupprimer = new JButton("Supprimer");
+	private JTextField tfReference;
+	private JTextField tfDesignation;
+	private JTextField tfPrix;
+	private JTextField tfQuantite;
+	private JTextField tfCategorie;
+	private JButton btAnnuler;
+	private JButton btEnregistrer;
+	private JButton btSupprimer;
 		
 	public FicheProduit(Produit monProduit) {
-		this.setTitle("Fiche '"+ monProduit.get +"'");
+		this.setTitle("Fiche "+ monProduit.getNom());
 		this.setBounds(200,200,650,400);
 		this.setResizable(false);
 		this.setLayout(null);
+		
+		this.tfCategorie = new JTextField(monProduit.getCategorie());
+		
+		
 	}	
 		
 	@Override
