@@ -1,7 +1,7 @@
 package controleur;
 
 import vue.Connexion;
-import vue.VueProduit;
+import vue.VueArticle;
 
 @SuppressWarnings("unused")
 public class Controleur 

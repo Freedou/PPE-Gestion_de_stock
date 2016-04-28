@@ -80,7 +80,7 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
                     //destruction de l'interface connexion
                     this.dispose();
                     //lancement du menu
-                    new VueProduit();
+                    new VueArticle();
 
                 }
                 

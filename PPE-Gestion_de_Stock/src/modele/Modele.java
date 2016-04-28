@@ -44,7 +44,7 @@ public class Modele {
         return uneListe;
     }
     
-    public static void insertProduit(Article unArticle)
+    public static void insertArticle(Article unArticle)
     {
         //inserer un produit dans la table articles
         String requete ="insert into articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) values ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"',"+unArticle.getId_sous_famille()+","+unArticle.getNom()+",'"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";

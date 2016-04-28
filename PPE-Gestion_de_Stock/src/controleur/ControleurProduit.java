@@ -3,7 +3,7 @@ package controleur;
 import java.util.LinkedList;
 import java.util.Scanner;
 import modele.Modele;
-import vue.VueProduit;
+import vue.VueArticle;
 
 public class ControleurProduit 
 {
@@ -37,7 +37,7 @@ public class ControleurProduit
  }
  public String afficherLesResultats()
  {
-     this.lesProduits = Modele.selectWhere(VueProduit.saisirCle());
+     this.lesProduits = Modele.selectWhere(VueArticle.saisirCle());
      return this.toString();
  }       
  
@@ -55,15 +55,15 @@ public class ControleurProduit
          {
              case 1 : this.chargerLesProduits();
                       //appel de la vue
-                      VueProduit.afficherProduits(this.toString());
+                      VueArticle.afficherProduits(this.toString());
                  break;
              case 2 :
                     //le controlleur appelle vue
-                      this.ajouter(VueProduit.saisirProduit());
+                      this.ajouter(VueArticle.saisirProduit());
                       System.out.println("Le produit a ete ajouté avec succès !");
                  break;
              case 3 :
-                      VueProduit.afficherProduits(this.afficherLesResultats());
+                      VueArticle.afficherProduits(this.afficherLesResultats());
                       System.out.println("La recherche est terminée");
                  break; 
          }

@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.Article;
 import controleur.Produit;
 
 import java.awt.Color;
@@ -24,7 +25,7 @@ import javax.swing.JTextField;
 import modele.Modele;
 
 @SuppressWarnings({ "serial" })
-public class VueProduit extends JFrame implements ActionListener
+public class VueArticle extends JFrame implements ActionListener
 {
 	private JPanel panelMenu=new JPanel();
 	private JPanel panelAjouter=new JPanel();
@@ -68,7 +69,7 @@ public class VueProduit extends JFrame implements ActionListener
 	//ajout d'un background
 	private JLabel monBackground = new JLabel(new ImageIcon("C:/Users/Joffray/Desktop/Background.jpg"));
 	
-	public VueProduit()
+	public VueArticle()
 	{
 		this.setTitle("Gestion de stock");
 		this.setBounds(200,200,650,400);
@@ -179,24 +180,34 @@ public class VueProduit extends JFrame implements ActionListener
 		System.out.println(chaine);
 	}
 	
-	public static Produit saisirProduit()
+	public static Article saisirProduit()
 	{
-		Produit unProd = new Produit();
-		System.out.println("Donner la référence : ");
-		unProd.setReference(Console.saisirString());
+		Article unArticle = new Article();
+		System.out.println("Donner l'id : ");
+		unArticle.setId(Console.saisirInt());
+
+		System.out.println("Donner l'id de la famille : ");
+		unArticle.setId_famille(Console.saisirInt());
+		
+		System.out.println("Donner l'id de la sous-famille : ");
+		unArticle.setId_sous_famille(Console.saisirInt());
+
+		System.out.println("Donner le nom : ");
+		unArticle.setNom(Console.saisirString());
+       
+		System.out.println("Donner le code de l'article : ");
+		unArticle.setCode_article(Console.saisirString());
 
 		System.out.println("Donner la désignation : ");
-		unProd.setDesignation(Console.saisirString());
-
-		System.out.println("Donner la catégorie : ");
-		unProd.setCategorie(Console.saisirString());
-       
-		System.out.println("Donner le prix : ");
-		unProd.setPrix(Console.saisirFloat());
-
+		unArticle.setDesignation(Console.saisirString());
+		
+		System.out.println("Donner le prix unitaire : ");
+		unArticle.setPrix_unitaire(Console.saisirFloat());
+		
 		System.out.println("Donner la quantité : ");
-		unProd.setQte(Console.saisirInt());
-		return unProd;
+		unArticle.setQuantite(Console.saisirInt());
+		
+		return unArticle;
 	}
    
 	public static String saisirCle()
@@ -226,16 +237,19 @@ public class VueProduit extends JFrame implements ActionListener
 				this.panelRechercher.setVisible(false);
 				this.panelSupprimer.setVisible(false);
 				String titres[] = {"Référence", "Désignation", "Prix", "Qantité", "Catégorie"};
-				LinkedList<Produit> uneListe = Modele.selectAll();
+				LinkedList<Article> uneListe = Modele.selectAll();
 				Object donnees [][] = new Object[uneListe.size()][5];
 				int i = 0;
-				for(Produit unProd : uneListe)
+				for(Article unArticle : uneListe)
 				{
-					donnees[i][0]=unProd.getReference();
-					donnees[i][1]=unProd.getDesignation();
-					donnees[i][2]=unProd.getPrix();
-					donnees[i][3]=unProd.getQte();
-					donnees[i][4]=unProd.getCategorie();
+					donnees[i][0]=unArticle.getId();
+					donnees[i][1]=unArticle.getId_famille();
+					donnees[i][2]=unArticle.getId_sous_famille();
+					donnees[i][3]=unArticle.getNom();
+					donnees[i][4]=unArticle.getCode_article();
+					donnees[i][5]=unArticle.getDesignation();
+					donnees[i][6]=unArticle.getPrix_unitaire();
+					donnees[i][7]=unArticle.getQuantite();
 					i++;
 				}
 				this.tabProduits = new JTable(donnees, titres);
@@ -288,12 +302,12 @@ public class VueProduit extends JFrame implements ActionListener
 								{
 									String reference = this.tfReference.getText();
 									String designation = this.tfDesignation.getText();
-									String categorie = this.tfCategorie.getText();
-									float prix = 0;
+									//String categorie = this.tfCategorie.getText();
+									float prix_unitaire = 0;
 									int quantite = 0;
 									boolean ok=true;
 									try{
-										prix=Float.parseFloat(this.tfPrix.getText());
+										prix_unitaire=Float.parseFloat(this.tfPrix.getText());
 										this.tfQuantite.setBackground(Color.white);
 									}
 									catch(Exception exp)
@@ -315,8 +329,9 @@ public class VueProduit extends JFrame implements ActionListener
 									try{
 										if(ok == true)
 										{
-											Produit unProd = new Produit(reference, designation, categorie, prix, quantite);
-											Modele.insertProduit(unProd);
+											Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, 
+													designation, prix_unitaire, quantite);
+											Modele.insertArticle(unArticle);
 											JOptionPane.showMessageDialog(this, "Insertion réussi !");
 											this.panelAjouter.setVisible(false);
 										}
@@ -379,10 +394,10 @@ public class VueProduit extends JFrame implements ActionListener
 	private void remplixCBX()
 	{
 		this.cbxProduit.removeAllItems();
-		LinkedList<Produit> uneListe = Modele.selectAll();
-		for(Produit unProd : uneListe)
+		LinkedList<Article> uneListe = Modele.selectAll();
+		for(Article unArticle : uneListe)
 		{
-			this.cbxProduit.addItem(unProd.toString());
+			this.cbxProduit.addItem(unArticle.toString());
 		}
 	}
 }//fin de la classe
