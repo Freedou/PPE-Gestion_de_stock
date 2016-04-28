@@ -1,38 +1,38 @@
 package controleur;
 
 
-public class Produit 
+public class Article 
 {
    private String nom, designation, code_article;
    private float prix_unitaire;
    private int id, id_famille, id_sous_famille, quantite;
    
-   public Produit ()
-   {
-       this.nom = this.designation = this.code_article="";
-       this.prix_unitaire = 0;
-       this.id = 0;
+   public Article ()
+   {	
+	   this.id = 0;
        this.id_famille = 0;
        this.id_sous_famille = 0;
+       this.nom = this.designation = this.code_article="";
+       this.prix_unitaire = 0;
        this.quantite = 0;
    }
    
-   public Produit (String nom, String designation, String code_article, float prix_unitaire, int id, int id_famille, int id_sous_famille, int quantite)
+   public Article (int id, int id_famille, int id_sous_famille, String nom, String code_article, String designation, float prix_unitaire, int quantite)
    {
-       this.nom = nom;
-       this.designation = designation;
-       this.code_article= code_article;
-       this.prix_unitaire = prix_unitaire;
-       this.id = id;
+	   this.id = id;
        this.id_famille = id_famille;
        this.id_sous_famille = id_sous_famille;
+	   this.nom = nom;
+       this.code_article= code_article;
+       this.designation = designation;
+       this.prix_unitaire = prix_unitaire;
        this.quantite = quantite;
    }
    
    
    public String toString()
    {
-       return this.nom+" - "+this.designation+" - "+this.id+" - "+this.id_famille+" - "+this.prix+" - "+this.qte+" - "+this.categorie;
+       return this.nom+" - "+this.designation+" - "+this.id+" - "+this.id_famille+" - "+this.id_sous_famille+" - "+this.prix_unitaire+" - "+this.quantite+" - "+this.code_article;
    }
 
 	public String getNom() {
