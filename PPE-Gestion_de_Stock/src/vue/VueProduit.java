@@ -43,7 +43,8 @@ public class VueProduit extends JFrame implements ActionListener
 	private JTextField tfDesignation= new JTextField("");
 	private JTextField tfPrix = new JTextField("");
 	private JTextField tfQuantite = new JTextField("");
-	private JTextField tfCategorie = new JTextField("");
+	private JTextField tfFamille = new JTextField("");
+	private JTextField tfFamille
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btEnregistrer = new JButton("Enregistrer");
 	
