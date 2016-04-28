@@ -48,7 +48,7 @@ public class Modele {
     {
         //inserer un produit dans la table articles
         String requete ="insert into articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) values ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"',"+unArticle.getId_sous_famille()+","+unArticle.getNom()+",'"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";
-        BDD uneBDD = new BDD ("localhost", "stock", "root", "");
+        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -67,7 +67,7 @@ public class Modele {
     {
         //select where designation etc.
         LinkedList<Article> uneListe = new LinkedList<Article>();
-        BDD uneBDD = new BDD ("localhost", "stock", "root", "");
+        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="select * from produit where reference like '%"+cle+"%'"+" or designation like '%"+cle+"%'"+" or categorie like '%"+cle+"%';";  
@@ -100,11 +100,11 @@ public class Modele {
         return uneListe;
     }
     
-    public static int deleteProduits (String cle)
+    public static int deleteArticles (String cle)
 	{
     	int nb=0;
     	String requete="SELECT count(*) FROM produit WHERE reference LIKE '%"+cle+"%'"+" OR designation LIKE '%"+cle+"%'"+" OR categorie LIKE '%"+cle+"%';";
-    	BDD uneBDD = new BDD ("localhost", "stock", "root", "");
+    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
