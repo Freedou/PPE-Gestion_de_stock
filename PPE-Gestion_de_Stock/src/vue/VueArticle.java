@@ -248,7 +248,7 @@ public class VueArticle extends JFrame implements ActionListener
 				this.panelSupprimer.setVisible(false);
 				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
-				Object donnees [][] = new Object[uneListe.size()][5];
+				Object donnees [][] = new Object[uneListe.size()][8];
 				int i = 0;
 				for(Article unArticle : uneListe)
 				{
