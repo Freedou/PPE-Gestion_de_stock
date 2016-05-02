@@ -3,41 +3,41 @@ package controleur;
 import java.util.LinkedList;
 import java.util.Scanner;
 import modele.Modele;
-import vue.VueProduit;
+import vue.VueArticle;
 
-public class ControleurProduit 
+public class ControleurArticle 
 {
- private LinkedList<Produit> lesProduits;
+ private LinkedList<Article> lesArticles;
  
- public ControleurProduit()
+ public ControleurArticle()
  {
-     this.lesProduits=null;
+     this.lesArticles=null;
  }
  
- public void chargerLesProduits ()
+ public void chargerLesArticles ()
  {
-     this.lesProduits = Modele.selectAll();
+     this.lesArticles = Modele.selectAll();
  }
  
 
  public String toString()
  {
      String chaine ="";
-     for(Produit unProd : this.lesProduits)
+     for(Article unArticle : this.lesArticles)
      {
-         chaine += unProd.toString();
+         chaine += unArticle.toString();
          chaine += "\n\n";
      }
      return chaine;
  }
- public void ajouter(Produit unProd)
+ public void ajouter(Article unArticle)
  {
      //le controlleur appelle le modele
-     Modele.insertProduit(unProd);
+     Modele.insertArticle(unArticle);
  }
  public String afficherLesResultats()
  {
-     this.lesProduits = Modele.selectWhere(VueProduit.saisirCle());
+     this.lesArticles = Modele.selectWhere(VueArticle.saisirCle());
      return this.toString();
  }       
  
@@ -46,24 +46,24 @@ public class ControleurProduit
      Scanner sc = new Scanner (System.in);
      int choix = 0;
      do{
-         System.out.println("1- Afficher les produits");
-         System.out.println("2- Ajouter un produit");
+         System.out.println("1- Afficher les Articles");
+         System.out.println("2- Ajouter un Article");
          System.out.println("3- Rechercher par clé");
          System.out.println("0- Quitter");
          choix = sc.nextInt();
          switch (choix)
          {
-             case 1 : this.chargerLesProduits();
+             case 1 : this.chargerLesArticles();
                       //appel de la vue
-                      VueProduit.afficherProduits(this.toString());
+                      VueArticle.afficherArticle(this.toString());
                  break;
              case 2 :
                     //le controlleur appelle vue
-                      this.ajouter(VueProduit.saisirProduit());
-                      System.out.println("Le produit a ete ajouté avec succès !");
+                      this.ajouter(VueArticle.saisirArticle());
+                      System.out.println("L'article a ete ajouté avec succès !");
                  break;
              case 3 :
-                      VueProduit.afficherProduits(this.afficherLesResultats());
+                      VueArticle.afficherArticle(this.afficherLesResultats());
                       System.out.println("La recherche est terminée");
                  break; 
          }

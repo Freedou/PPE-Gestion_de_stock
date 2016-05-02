@@ -10,10 +10,10 @@ public class ModeleUser {
     {
         //select where designation etc.
         String [] tab = new String [2];
-        BDD uneBDD = new BDD ("localhost", "stock", "root", "");
+        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="select count(email) as nb, nom, prenom from user where email ='"+email+"' and mdp ='"+mdp+"';";  
+        String requete ="select count(mail) as nb, nom, prenom from users where mail ='"+email+"' and mot_de_passe ='"+mdp+"';";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
