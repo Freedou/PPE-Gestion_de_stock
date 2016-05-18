@@ -8,7 +8,7 @@ public class Controleur
 {
     public static void main(String args[])
     {
-        new Connexion();
-    	//new VueArticle();
+        //new Connexion();
+    	new VueArticle();
     }
 }
