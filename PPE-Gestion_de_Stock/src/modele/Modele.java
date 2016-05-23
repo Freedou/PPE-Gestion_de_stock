@@ -37,7 +37,7 @@ public class Modele {
         }
         catch (SQLException exp)
         {
-            System.out.println("Erreur d'execution :"+ requete);
+            System.out.println("Erreur d'execution :"+ exp);
         }
         
         uneBDD.seDeconnecter();

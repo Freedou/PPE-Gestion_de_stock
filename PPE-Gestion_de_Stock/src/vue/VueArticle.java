@@ -1,24 +1,13 @@
 package vue;
 
 import controleur.Article;
-
-
-
-
-
-
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -29,8 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-
 import modele.Modele;
 
 @SuppressWarnings({ "serial" })
@@ -42,16 +29,19 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JPanel panelRechercher=new JPanel();
 	private JPanel panelSupprimer=new JPanel();
 	private JPanel panelBouton=new JPanel();
+	private JPanel panelArticle=new JPanel();
 	
-	//private JButton btAjouter = new JButton("Ajouter");
-	private JButton btRechercher = new JButton("Rechercher");
-	private JButton btLister = new JButton("Lister");
-	private JButton btSupprimer = new JButton("Supprimer");
-	private JButton btQuitter = new JButton("Quitter");
+	private JButton btArticle = new JButton("Gérer les articles");
 	private JButton btClients = new JButton("Gerer clients");
 	private JButton btStats = new JButton("Voir statistiques");
+	private JButton btQuitter = new JButton("Quitter");
+	
+	private JButton btRechercher = new JButton("Rechercher");
+	private JButton btSupprimer = new JButton("Supprimer");
 	private JButton btModifier = new JButton("Modifier");
-	private JButton btRefresh = new JButton("refresh");
+	private JButton btRefresh = new JButton("Refresh");
+	private JButton btAnnuler = new JButton("Annuler");
+	private JButton btAjouter = new JButton("Ajouter");
 	
 	//construction des objet ajouter
 	private JTextField tfId = new JTextField("");
@@ -62,8 +52,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JTextField tfDesignation = new JTextField("");
 	private JTextField tfPrix_unitaire = new JTextField("");
 	private JTextField tfQuantite = new JTextField("");
-	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btAjouter = new JButton("Ajouter");
 	
 	//construction des objet lister
 	private JLabel lbLister= new JLabel("Liste des articles");
@@ -77,15 +65,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JComboBox cbxArticle = new JComboBox();
 	private JTextArea taResultat = new JTextArea("Résultat : ");
 	
-	//construction des objet supprimer
-	private JLabel lbSuppr = new JLabel("Supprimer des articles");
-	private JTextField tfRecherche = new JTextField();
-	private JButton btSuppr = new JButton("Supprimer");
-	private JTextArea taNbobj = new JTextArea("Nombre d'articles : ");
-	
-	//ajout d'un background
-	private JLabel monBackground = new JLabel(new ImageIcon("C:/Users/Joffray/Desktop/Background.jpg"));
-	
 	public VueArticle()
 	{
 		this.setTitle("Gestion de stocks");
@@ -93,8 +72,20 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.setResizable(false);
 		this.setLayout(null);
 		
+		//construction du panel menu
+		this.panelMenu.setBounds( 0, 0, 150, 600);
+		this.panelMenu.setBackground(Color.red);
+		this.panelMenu.setLayout(new GridLayout(7, 1));
+		this.panelMenu.add(new JLabel(""));
+		this.panelMenu.add(this.btArticle);
+		this.panelMenu.add(this.btClients);
+		this.panelMenu.add(this.btStats);
+		this.panelMenu.add(this.btQuitter);
+		this.panelMenu.add(new JLabel(""));
+		this.add(this.panelMenu);
+		
 		//construction du panel boutons
-		this.panelBouton.setBounds(1050, 0, 150, 600);
+		this.panelBouton.setBounds(900, 0, 150, 600);
 		this.panelBouton.setBackground(Color.red);
 		this.panelBouton.setLayout(new GridLayout(7, 1));
 		this.panelBouton.add(new JLabel(""));
@@ -105,58 +96,32 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelBouton.add(this.btAnnuler);
 		this.panelBouton.add(new JLabel(""));
 		this.panelBouton.setVisible(true);
-		this.add(this.panelBouton);
 		
-		//construction du panel menu
-		this.panelMenu.setBounds( 0, 0, 150, 600);
-		this.panelMenu.setBackground(Color.red);
-		this.panelMenu.setLayout(new GridLayout(7, 1));
-		this.panelMenu.add(new JLabel("Menu Principale"));
-		this.panelMenu.add(this.btLister);
-		this.panelMenu.add(this.btClients);
-		this.panelMenu.add(this.btStats);
-		this.panelMenu.add(this.btQuitter);
-		this.panelMenu.add(new JLabel(""));
-		this.add(this.panelMenu);
-		
-		//rendre les bouton clickable
-		//this.btAjouter.addActionListener(this);
-		this.btLister.addActionListener(this);
-		this.btRechercher.addActionListener(this);
-		this.btSupprimer.addActionListener(this);
-		this.btQuitter.addActionListener(this);
-		this.btAnnuler.addActionListener(this);
-		this.btAjouter.addActionListener(this);
-		this.btFermer.addActionListener(this);
-		this.btOk.addActionListener(this);
-		this.btSuppr.addActionListener(this);
-		this.btRefresh.addActionListener(this);
 		
 		//construction du panel ajouter
-		this.panelAjouter.setBounds(150, 250, 900, 300);
+		this.panelAjouter.setBounds(0, 300, 900, 300);
 		this.panelAjouter.setBackground(Color.cyan);
 		this.panelAjouter.setLayout(new GridLayout(9,2));
-		this.panelAjouter.add(new JLabel("id :"));
+		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfId);
-		this.panelAjouter.add(new JLabel("id_famille :"));
+		this.panelAjouter.add(new JLabel("Id famille :"));
 		this.panelAjouter.add(this.tfId_famille);
-		this.panelAjouter.add(new JLabel("id_sous_famille :"));
+		this.panelAjouter.add(new JLabel("Id sous famille :"));
 		this.panelAjouter.add(this.tfId_sous_famille);
-		this.panelAjouter.add(new JLabel("nom :"));
+		this.panelAjouter.add(new JLabel("Nom :"));
 		this.panelAjouter.add(this.tfNom);
-		this.panelAjouter.add(new JLabel("Code_article :"));
+		this.panelAjouter.add(new JLabel("Code article :"));
 		this.panelAjouter.add(this.tfCode_article);
-		this.panelAjouter.add(new JLabel("Designation:"));
+		this.panelAjouter.add(new JLabel("Désignation:"));
 		this.panelAjouter.add(this.tfDesignation);
-		this.panelAjouter.add(new JLabel("Prix_unitaire :"));
+		this.panelAjouter.add(new JLabel("Prix unitaire :"));
 		this.panelAjouter.add(this.tfPrix_unitaire);
 		this.panelAjouter.add(new JLabel("Quantité :"));
 		this.panelAjouter.add(this.tfQuantite);
-		this.panelAjouter.setVisible(false);
-		this.add(this.panelAjouter);
+		this.panelAjouter.setVisible(true);
 
 		//construction du panel lister
-		this.panelLister.setBounds(150, 0, 900, 240);
+		this.panelLister.setBounds(0, 0, 900, 300);
 		this.panelLister.setBackground(Color.GRAY);
 		this.panelLister.setLayout(null);
 		this.lbLister.setBounds(100, 20, 100, 20);
@@ -165,48 +130,28 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.btRefresh.setBounds(400, 10, 100, 20);
 		this.panelLister.add(this.btRefresh);
 		this.panelLister.add(this.btFermer);
-		this.panelLister.setVisible(false);
-		this.add(this.panelLister);
+		this.panelLister.setVisible(true);
 
-		//construction du panel rechercher
-		this.panelRechercher.setBounds(140, 10, 800, 500);
-		this.panelRechercher.setBackground(Color.green);
-		this.panelRechercher.setLayout(null);
-		this.lbRechercher.setBounds(100, 20, 200, 20);
-		this.panelRechercher.add(this.lbRechercher);
-		this.cbxArticle.setBounds(50, 80, 200, 20);
-		this.panelRechercher.add(this.cbxArticle);
-		this.btOk.setBounds(260, 80, 80, 20);
-		this.panelRechercher.add(this.btOk);
-		this.taResultat.setBounds(100, 120, 300, 150);
-		this.taResultat.setEditable(false);
-		this.taResultat.setBackground(Color.green);
-		this.taResultat.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
-		this.panelRechercher.add(this.taResultat);
-		this.panelRechercher.setVisible(false);
-		this.add(this.panelRechercher);
-
-		//construction du panel suppimer
-		this.panelSupprimer.setBounds(140, 10, 800, 500);
-		this.panelSupprimer.setBackground(Color.gray);
-		this.panelSupprimer.setLayout(null);
-		this.lbSuppr.setBounds(100, 20, 200, 20);
-		this.panelSupprimer.add(this.lbSuppr);
-		this.tfRecherche.setBounds(50, 80, 200, 20);
-		this.panelSupprimer.add(this.tfRecherche);
-		this.btSuppr.setBounds(260, 80, 100, 20);
-		this.panelSupprimer.add(this.btSuppr);
-		this.taNbobj.setBounds(100, 120, 300, 150);
-		this.taNbobj.setEditable(false);
-		this.taNbobj.setBackground(Color.gray);
-		this.taNbobj.setBorder(BorderFactory.createLineBorder(Color.white, 1, true));
-		this.panelSupprimer.add(this.taNbobj);
-		this.panelSupprimer.setVisible(false);
-		this.add(this.panelSupprimer);
+		//construction du panel gerer article
+		this.panelArticle.setBounds(150, 0, 1050, 600);
+		this.panelArticle.setLayout(null);
+		this.panelArticle.add(this.panelLister);
+		this.panelArticle.add(this.panelAjouter);
+		this.panelArticle.add(this.panelBouton);
+		this.panelArticle.setVisible(false);
+		this.add(this.panelArticle);
 		
-		//mon background
-        this.monBackground.setBounds(0, 0, 650, 400);
-		this.add(this.monBackground);
+		//rendre les bouton clickable
+		this.btAjouter.addActionListener(this);
+		this.btArticle.addActionListener(this);
+		this.btRechercher.addActionListener(this);
+		this.btSupprimer.addActionListener(this);
+		this.btQuitter.addActionListener(this);
+		this.btAnnuler.addActionListener(this);
+		this.btAjouter.addActionListener(this);
+		this.btFermer.addActionListener(this);
+		this.btOk.addActionListener(this);
+		this.btRefresh.addActionListener(this);
 		
 		this.setVisible(true);
 	}
@@ -261,19 +206,13 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	{
 		if(e.getSource()==this.btClients)
 		{
-			this.panelAjouter.setVisible(true);
-			this.panelLister.setVisible(false);
-			this.panelRechercher.setVisible(false);
-			this.panelSupprimer.setVisible(false);
+			this.panelArticle.setVisible(false);
 		}
 		else
 		{
-			if(e.getSource()==this.btLister)
+			if(e.getSource()==this.btArticle)
 			{
-				this.panelAjouter.setVisible(false);
-				this.panelLister.setVisible(true);
-				this.panelRechercher.setVisible(false);
-				this.panelSupprimer.setVisible(false);
+				this.panelArticle.setVisible(true);
 				//this.tabArticles.repaint();
 				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
@@ -297,27 +236,18 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 				uneScroll.setBounds(20, 50, 750, 190);
 				uneScroll.setVisible(true);
 				this.panelLister.add(uneScroll);
-				this.panelAjouter.setVisible(true);
-
 			}
 			else
 			{
 				if(e.getSource()==this.btRechercher)
 				{
-					this.remplixCBX();
-					this.panelAjouter.setVisible(false);
-					this.panelLister.setVisible(false);
-					this.panelRechercher.setVisible(true);
-					this.panelSupprimer.setVisible(false);
+					
 				}
 				else
 				{
 					if(e.getSource()==this.btSupprimer)
 					{
-						this.panelAjouter.setVisible(false);
-						this.panelLister.setVisible(false);
-						this.panelRechercher.setVisible(false);
-						this.panelSupprimer.setVisible(true);
+						
 					}
 					else
 					{
@@ -441,26 +371,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 										}
 										else
 										{
-											if(e.getSource()==this.btSuppr)
-											{
-												String cle = this.tfRecherche.getText();
-												if(!cle.equals(""))
-												{
-													int nb = Modele.deleteArticles(this.tfRecherche.getText());
-													if(nb!=0)
-													{
-														this.taNbobj.setText("Nombre d'articles supprimer : "+nb);
-													}
-													else
-													{
-														this.taNbobj.setText("Aucun article ne correspond à votre recherche.");
-													}
-												}
-												else
-												{
-													this.taNbobj.setText("Vous devez renseigner un nom d'article.");
-												}
-											}
+											
 										}
 									}
 								}
@@ -487,7 +398,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getClickCount() == 1) {
 		      JTable target = (JTable)e.getSource();
 		      int row = target.getSelectedRow();
@@ -507,26 +417,22 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseEntered(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseExited(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent e) {
 		
 	}
-}//fin de la classe
+}
