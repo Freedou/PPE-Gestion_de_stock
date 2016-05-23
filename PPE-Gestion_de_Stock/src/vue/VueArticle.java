@@ -29,7 +29,10 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JPanel panelRechercher=new JPanel();
 	private JPanel panelSupprimer=new JPanel();
 	private JPanel panelBouton=new JPanel();
+	
 	private JPanel panelArticle=new JPanel();
+	private JPanel panelClient=new JPanel();
+	private JPanel panelStats=new JPanel();
 	
 	private JButton btArticle = new JButton("Gérer les articles");
 	private JButton btClients = new JButton("Gerer clients");
@@ -206,13 +209,17 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	{
 		if(e.getSource()==this.btClients)
 		{
+			this.panelClient.setVisible(true);
 			this.panelArticle.setVisible(false);
+			this.panelStats.setVisible(false);
 		}
 		else
 		{
 			if(e.getSource()==this.btArticle)
 			{
+				this.panelClient.setVisible(false);
 				this.panelArticle.setVisible(true);
+				this.panelStats.setVisible(false);
 				//this.tabArticles.repaint();
 				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
@@ -239,9 +246,11 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 			}
 			else
 			{
-				if(e.getSource()==this.btRechercher)
+				if(e.getSource()==this.btStats)
 				{
-					
+					this.panelClient.setVisible(false);
+					this.panelArticle.setVisible(false);
+					this.panelStats.setVisible(true);
 				}
 				else
 				{
