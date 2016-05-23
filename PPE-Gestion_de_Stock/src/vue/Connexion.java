@@ -1,6 +1,20 @@
 package vue;
 
+import java.awt.BorderLayout;
+
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 import java.awt.Color;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +40,11 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
     private JButton btAnnuler = new JButton("Annuler");
     private JButton btValider = new JButton("Valider");
     
+    
     public Connexion() {
         this.setBounds(200,200,400,200);
         this.setTitle("Connexion à la gestion de stock");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLayout(null);
         
         //placement des objets dans le panel
