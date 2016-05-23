@@ -7,6 +7,7 @@ import controleur.Article;
 
 
 
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import modele.Modele;
 
@@ -39,12 +41,17 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JPanel panelLister=new JPanel();
 	private JPanel panelRechercher=new JPanel();
 	private JPanel panelSupprimer=new JPanel();
+	private JPanel panelBouton=new JPanel();
 	
-	private JButton btAjouter = new JButton("Ajouter");
+	//private JButton btAjouter = new JButton("Ajouter");
 	private JButton btRechercher = new JButton("Rechercher");
 	private JButton btLister = new JButton("Lister");
 	private JButton btSupprimer = new JButton("Supprimer");
 	private JButton btQuitter = new JButton("Quitter");
+	private JButton btClients = new JButton("Gerer clients");
+	private JButton btStats = new JButton("Voir statistiques");
+	private JButton btModifier = new JButton("Modifier");
+	private JButton btRefresh = new JButton("refresh");
 	
 	//construction des objet ajouter
 	private JTextField tfId = new JTextField("");
@@ -56,7 +63,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JTextField tfPrix_unitaire = new JTextField("");
 	private JTextField tfQuantite = new JTextField("");
 	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btEnregistrer = new JButton("Enregistrer");
+	private JButton btAjouter = new JButton("Ajouter");
 	
 	//construction des objet lister
 	private JLabel lbLister= new JLabel("Liste des articles");
@@ -82,37 +89,51 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	public VueArticle()
 	{
 		this.setTitle("Gestion de stocks");
-		this.setBounds(200,200,1000,600);
-		this.setResizable(true);
+		this.setBounds(200,200,1200,600);
+		this.setResizable(false);
 		this.setLayout(null);
 		
+		//construction du panel boutons
+		this.panelBouton.setBounds(1050, 0, 150, 600);
+		this.panelBouton.setBackground(Color.red);
+		this.panelBouton.setLayout(new GridLayout(7, 1));
+		this.panelBouton.add(new JLabel(""));
+		this.panelBouton.add(this.btAjouter);
+		this.panelBouton.add(this.btSupprimer);
+		this.panelBouton.add(this.btModifier);
+		this.panelBouton.add(this.btRechercher);
+		this.panelBouton.add(this.btAnnuler);
+		this.panelBouton.add(new JLabel(""));
+		this.panelBouton.setVisible(true);
+		this.add(this.panelBouton);
+		
 		//construction du panel menu
-		this.panelMenu.setBounds(10, 10, 120, 500);
+		this.panelMenu.setBounds( 0, 0, 150, 600);
 		this.panelMenu.setBackground(Color.red);
 		this.panelMenu.setLayout(new GridLayout(7, 1));
 		this.panelMenu.add(new JLabel("Menu Principale"));
-		this.panelMenu.add(this.btAjouter);
 		this.panelMenu.add(this.btLister);
-		this.panelMenu.add(this.btRechercher);
-		this.panelMenu.add(this.btSupprimer);
+		this.panelMenu.add(this.btClients);
+		this.panelMenu.add(this.btStats);
 		this.panelMenu.add(this.btQuitter);
 		this.panelMenu.add(new JLabel(""));
 		this.add(this.panelMenu);
 		
 		//rendre les bouton clickable
-		this.btAjouter.addActionListener(this);
+		//this.btAjouter.addActionListener(this);
 		this.btLister.addActionListener(this);
 		this.btRechercher.addActionListener(this);
 		this.btSupprimer.addActionListener(this);
 		this.btQuitter.addActionListener(this);
 		this.btAnnuler.addActionListener(this);
-		this.btEnregistrer.addActionListener(this);
+		this.btAjouter.addActionListener(this);
 		this.btFermer.addActionListener(this);
 		this.btOk.addActionListener(this);
 		this.btSuppr.addActionListener(this);
+		this.btRefresh.addActionListener(this);
 		
 		//construction du panel ajouter
-		this.panelAjouter.setBounds(140, 250, 800, 300);
+		this.panelAjouter.setBounds(150, 250, 900, 300);
 		this.panelAjouter.setBackground(Color.cyan);
 		this.panelAjouter.setLayout(new GridLayout(9,2));
 		this.panelAjouter.add(new JLabel("id :"));
@@ -131,18 +152,18 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelAjouter.add(this.tfPrix_unitaire);
 		this.panelAjouter.add(new JLabel("Quantité :"));
 		this.panelAjouter.add(this.tfQuantite);
-		this.panelAjouter.add(this.btAnnuler);
-		this.panelAjouter.add(this.btEnregistrer);
 		this.panelAjouter.setVisible(false);
 		this.add(this.panelAjouter);
 
 		//construction du panel lister
-		this.panelLister.setBounds(140, 10, 800, 240);
-		this.panelLister.setBackground(Color.yellow);
+		this.panelLister.setBounds(150, 0, 900, 240);
+		this.panelLister.setBackground(Color.GRAY);
 		this.panelLister.setLayout(null);
 		this.lbLister.setBounds(100, 20, 100, 20);
 		this.panelLister.add(this.lbLister);
-		this.btFermer.setBounds(300, 450, 100, 20);
+		this.btFermer.setBounds(300, 10, 100, 20);
+		this.btRefresh.setBounds(400, 10, 100, 20);
+		this.panelLister.add(this.btRefresh);
 		this.panelLister.add(this.btFermer);
 		this.panelLister.setVisible(false);
 		this.add(this.panelLister);
@@ -238,7 +259,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(e.getSource()==this.btAjouter)
+		if(e.getSource()==this.btClients)
 		{
 			this.panelAjouter.setVisible(true);
 			this.panelLister.setVisible(false);
@@ -253,6 +274,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 				this.panelLister.setVisible(true);
 				this.panelRechercher.setVisible(false);
 				this.panelSupprimer.setVisible(false);
+				//this.tabArticles.repaint();
 				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
 				Object donnees [][] = new Object[uneListe.size()][8];
@@ -322,7 +344,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 							}
 							else
 							{
-								if(e.getSource()==this.btEnregistrer)
+								if(e.getSource()==this.btAjouter)
 								{
 									int id = 0;
 									int id_famille = 0;
@@ -402,6 +424,10 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									if(e.getSource()==this.btFermer)
 									{
 										this.panelLister.setVisible(false);
+									}
+									else if(e.getSource()==this.btRefresh)
+									{
+										
 									}
 									else
 									{
