@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class Modele {
     
-    public static LinkedList<Article> selectAll ()
+    public static LinkedList<Article> selectAll()
     {
         LinkedList<Article> uneListe = new LinkedList<Article>();
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
@@ -63,14 +63,14 @@ public class Modele {
         uneBDD.seDeconnecter();
     }
     
-    public static LinkedList<Article> selectWhere (String cle)
+    public static LinkedList<Article> selectWhere(String cle)
     {
         //select where designation etc.
         LinkedList<Article> uneListe = new LinkedList<Article>();
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="select * from produit where reference like '%"+cle+"%'"+" or designation like '%"+cle+"%'"+" or categorie like '%"+cle+"%';";  
+        String requete ="select * from articles where reference like '%"+cle+"%'"+" or designation like '%"+cle+"%'"+" or categorie like '%"+cle+"%';";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -100,10 +100,10 @@ public class Modele {
         return uneListe;
     }
     
-    public static int deleteArticles (String cle)
+    public static int deleteArticle(String id)
 	{
     	int nb=0;
-    	String requete="SELECT count(*) FROM produit WHERE reference LIKE '%"+cle+"%'"+" OR designation LIKE '%"+cle+"%'"+" OR categorie LIKE '%"+cle+"%';";
+    	String requete="SELECT count(*) FROM articles WHERE id="+id+";";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -114,7 +114,7 @@ public class Modele {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="DELETE FROM produit WHERE reference LIKE '%"+cle+"%'"+" OR designation LIKE '%"+cle+"%'"+" OR categorie LIKE '%"+cle+"%';";
+            	requete="DELETE FROM articles WHERE id="+id+";";
                 unStat.execute(requete);
             }
             unStat.close();
@@ -126,5 +126,33 @@ public class Modele {
         uneBDD.seDeconnecter();
     	return nb;
 	}
+    
+    public static int updateArticle(Article unArticle)
+    {
+    	
+    	int nb=0;
+    	String requete="SELECT count(*) FROM articles WHERE id="+unArticle.getId()+";";
+    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        uneBDD.seConnecter();
+        try {
+            Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.next();
+        	nb = unRes.getInt(1);
+            if(nb > 0)
+            {
+            	requete="UPDATE FROM articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
+                unStat.execute(requete);
+            }
+            unStat.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur de la requete : "+ requete+"\nLa requête a retourné : "+exp);
+        }
+        uneBDD.seDeconnecter();
+    	return nb;
+    }
     
 }

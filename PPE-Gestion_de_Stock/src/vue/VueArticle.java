@@ -23,16 +23,16 @@ import modele.Modele;
 @SuppressWarnings({ "serial" })
 public class VueArticle extends JFrame implements ActionListener, MouseListener
 {
+	
 	private JPanel panelMenu=new JPanel();
-	private JPanel panelAjouter=new JPanel();
-	private JPanel panelLister=new JPanel();
-	private JPanel panelRechercher=new JPanel();
-	private JPanel panelSupprimer=new JPanel();
-	private JPanel panelBouton=new JPanel();
 	
 	private JPanel panelArticle=new JPanel();
 	private JPanel panelClient=new JPanel();
 	private JPanel panelStats=new JPanel();
+	
+	private JPanel panelAjouter=new JPanel();
+	private JPanel panelLister=new JPanel();
+	private JPanel panelBouton=new JPanel();
 	
 	private JButton btArticle = new JButton("Gérer les articles");
 	private JButton btClients = new JButton("Gerer clients");
@@ -107,6 +107,8 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelAjouter.setLayout(new GridLayout(9,2));
 		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfId);
+		this.tfId.setEditable(false);
+		this.tfId.setBackground(Color.gray);
 		this.panelAjouter.add(new JLabel("Id famille :"));
 		this.panelAjouter.add(this.tfId_famille);
 		this.panelAjouter.add(new JLabel("Id sous famille :"));
@@ -151,7 +153,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.btSupprimer.addActionListener(this);
 		this.btQuitter.addActionListener(this);
 		this.btAnnuler.addActionListener(this);
-		this.btAjouter.addActionListener(this);
 		this.btFermer.addActionListener(this);
 		this.btOk.addActionListener(this);
 		this.btRefresh.addActionListener(this);
@@ -256,7 +257,26 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 				{
 					if(e.getSource()==this.btSupprimer)
 					{
-						
+						int id = 0;
+						boolean ok=true;
+						try{
+
+							System.out.println("l'id est : "+this.tfId.getText());
+							id=Integer.parseInt(this.tfId.getText());
+							this.tfId.setBackground(Color.white);
+						}
+						catch(Exception exp)
+						{
+						}
+						if(id!=0)
+						{
+							//Modele.delete(id, table);
+							JOptionPane.showMessageDialog(this, "Suppression réussi !");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(this, "Erreur veuillez selectionner un article pour le supprimer.");
+						}
 					}
 					else
 					{
@@ -288,21 +308,18 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									int id = 0;
 									int id_famille = 0;
 									int id_sous_famille = 0;
-									String nom = this.tfNom.getText();
-									String code_article = this.tfCode_article.getText();
-									String designation = this.tfDesignation.getText();
+									String nom = "";
+									String code_article = "";
+									String designation = "";
 									float prix_unitaire = 0;
 									int quantite = 0;
 									boolean ok=true;
 									try{
 										id=Integer.parseInt(this.tfId.getText());
-										this.tfId.setBackground(Color.white);
+										this.tfId.setBackground(Color.gray);
 									}
 									catch(Exception exp)
 									{
-										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id");
-										this.tfId.setBackground(Color.red);
 									}
 									try{
 										id_famille=Integer.parseInt(this.tfId_famille.getText());
@@ -311,7 +328,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									catch(Exception exp)
 									{
 										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id_famille");
 										this.tfId_famille.setBackground(Color.red);
 									}
 									try{
@@ -321,8 +337,34 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									catch(Exception exp)
 									{
 										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie de l'id_sous_famille");
 										this.tfId_sous_famille.setBackground(Color.red);
+									}
+									try{
+										nom=this.tfNom.getText();
+										this.tfNom.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										this.tfNom.setBackground(Color.red);
+									}
+									try{
+										code_article=this.tfCode_article.getText();
+										this.tfCode_article.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										this.tfCode_article.setBackground(Color.red);
+									}
+									try{
+										designation=this.tfDesignation.getText();
+										this.tfDesignation.setBackground(Color.white);
+									}
+									catch(Exception exp)
+									{
+										ok = false;
+										this.tfDesignation.setBackground(Color.red);
 									}
 									try{
 										prix_unitaire=Float.parseFloat(this.tfPrix_unitaire.getText());
@@ -331,7 +373,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									catch(Exception exp)
 									{
 										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie du prix_unitaire");
 										this.tfPrix_unitaire.setBackground(Color.red);
 									}
 									try{
@@ -341,16 +382,30 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									catch(Exception exp)
 									{
 										ok = false;
-										JOptionPane.showMessageDialog(this, "Erreur de saisie de la quantité");
 										this.tfQuantite.setBackground(Color.red);
 									}
 									try{
 										if(ok == true)
 										{
 											Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite);
-											Modele.insertArticle(unArticle);
-											JOptionPane.showMessageDialog(this, "Insertion réussi !");
-											this.panelAjouter.setVisible(false);
+											if(id!=0)
+											{
+												//Modele.updateArticle(unArticle);
+
+												System.out.println("l'id est : "+id);
+												JOptionPane.showMessageDialog(this, "Modification réussi !");
+											}
+											else
+											{
+												//Modele.insertArticle(unArticle);
+
+												System.out.println("l'id est : "+id);
+												JOptionPane.showMessageDialog(this, "Insertion réussi !");
+											}
+										}
+										else
+										{
+											JOptionPane.showMessageDialog(this, "Erreur de saisie veuillez remplir correctement les champs coloré en rouge");
 										}
 									}
 									catch(Exception exp)
@@ -415,18 +470,26 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		      System.out.println("colonne "+column+" ligne "+row);
 		      System.out.println(this.tabArticles.getValueAt(row, column));
 		      this.tfId.setText(this.tabArticles.getValueAt(row, 0)+"");
+		      this.tfId.setBackground(Color.gray);
 		      this.tfId_famille.setText(this.tabArticles.getValueAt(row, 1)+"");
+		      this.tfId_famille.setBackground(Color.white);
 		      this.tfId_sous_famille.setText(this.tabArticles.getValueAt(row, 2)+"");
+		      this.tfId_sous_famille.setBackground(Color.white);
 		      this.tfNom.setText(this.tabArticles.getValueAt(row, 3)+"");
+		      this.tfNom.setBackground(Color.white);
 		      this.tfCode_article.setText(this.tabArticles.getValueAt(row, 4)+"");
+		      this.tfCode_article.setBackground(Color.white);
 		      this.tfDesignation.setText(this.tabArticles.getValueAt(row, 5)+"");
+		      this.tfDesignation.setBackground(Color.white);
 		      this.tfPrix_unitaire.setText(this.tabArticles.getValueAt(row, 6)+"");
+		      this.tfPrix_unitaire.setBackground(Color.white);
 		      this.tfQuantite.setText(this.tabArticles.getValueAt(row, 7)+"");
+		      this.tfQuantite.setBackground(Color.white);
 		    }
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent e) {
 		
 	}
 
