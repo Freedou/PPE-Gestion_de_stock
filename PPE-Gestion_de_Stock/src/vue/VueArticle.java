@@ -342,6 +342,11 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										nom=this.tfNom.getText();
 										this.tfNom.setBackground(Color.white);
+										if(nom.length()==0)
+										{
+											ok = false;
+											this.tfNom.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -351,6 +356,11 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										code_article=this.tfCode_article.getText();
 										this.tfCode_article.setBackground(Color.white);
+										if(code_article.length()==0)
+										{
+											ok = false;
+											this.tfCode_article.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -360,6 +370,11 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										designation=this.tfDesignation.getText();
 										this.tfDesignation.setBackground(Color.white);
+										if(designation.length()==0)
+										{
+											ok = false;
+											this.tfDesignation.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -369,6 +384,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										prix_unitaire=Float.parseFloat(this.tfPrix_unitaire.getText());
 										this.tfPrix_unitaire.setBackground(Color.white);
+										
 									}
 									catch(Exception exp)
 									{
