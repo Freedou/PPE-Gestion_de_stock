@@ -1,6 +1,7 @@
 package vue;
 
 import controleur.Article;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 import modele.Modele;
 
 @SuppressWarnings({ "serial" })
@@ -220,7 +224,9 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 			{
 				this.panelClient.setVisible(false);
 				this.panelArticle.setVisible(true);
+				this.panelLister.setVisible(false);
 				this.panelStats.setVisible(false);
+				
 				//this.tabArticles.repaint();
 				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
 				LinkedList<Article> uneListe = Modele.selectAll();
@@ -238,12 +244,15 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 					donnees[i][7]=unArticle.getQuantite();
 					i++;
 				}
-				this.tabArticles = new JTable(donnees, titres);
+				DefaultTableModel dm = new DefaultTableModel(donnees, titres);
+				this.tabArticles = new JTable(dm);
 				this.tabArticles.addMouseListener(this);
 				JScrollPane uneScroll = new JScrollPane(this.tabArticles);
 				uneScroll.setBounds(20, 50, 750, 190);
 				uneScroll.setVisible(true);
 				this.panelLister.add(uneScroll);
+				dm.fireTableDataChanged();
+				this.panelLister.setVisible(true);
 			}
 			else
 			{
@@ -342,11 +351,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										nom=this.tfNom.getText();
 										this.tfNom.setBackground(Color.white);
-										if(nom.length()==0)
-										{
-											ok = false;
-											this.tfNom.setBackground(Color.red);
-										}
 									}
 									catch(Exception exp)
 									{
@@ -356,11 +360,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										code_article=this.tfCode_article.getText();
 										this.tfCode_article.setBackground(Color.white);
-										if(code_article.length()==0)
-										{
-											ok = false;
-											this.tfCode_article.setBackground(Color.red);
-										}
 									}
 									catch(Exception exp)
 									{
@@ -370,11 +369,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										designation=this.tfDesignation.getText();
 										this.tfDesignation.setBackground(Color.white);
-										if(designation.length()==0)
-										{
-											ok = false;
-											this.tfDesignation.setBackground(Color.red);
-										}
 									}
 									catch(Exception exp)
 									{
@@ -384,7 +378,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									try{
 										prix_unitaire=Float.parseFloat(this.tfPrix_unitaire.getText());
 										this.tfPrix_unitaire.setBackground(Color.white);
-										
 									}
 									catch(Exception exp)
 									{
@@ -406,14 +399,14 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 											Article unArticle = new Article(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite);
 											if(id!=0)
 											{
-												//Modele.updateArticle(unArticle);
+												Modele.updateArticle(unArticle);
 
 												System.out.println("l'id est : "+id);
 												JOptionPane.showMessageDialog(this, "Modification réussi !");
 											}
 											else
 											{
-												//Modele.insertArticle(unArticle);
+												Modele.insertArticle(unArticle);
 
 												System.out.println("l'id est : "+id);
 												JOptionPane.showMessageDialog(this, "Insertion réussi !");
