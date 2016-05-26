@@ -1,6 +1,9 @@
 package modele;
 
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import controleur.Article;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,6 +58,7 @@ public class Modele {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             unStat.execute(requete);
             unStat.close();
+            JOptionPane.showMessageDialog(null, "Insertion réussi !");
         }
         catch (SQLException exp)
         {
@@ -146,6 +150,7 @@ public class Modele {
                 unStat.execute(requete);
             }
             unStat.close();
+            JOptionPane.showMessageDialog(null, "Modification réussi !");
         }
         catch (SQLException exp)
         {

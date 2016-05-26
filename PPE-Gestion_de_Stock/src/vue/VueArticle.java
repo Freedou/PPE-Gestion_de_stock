@@ -27,8 +27,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JPanel panelMenu=new JPanel();
 	
 	private JPanel panelArticle=new JPanel();
-	private JPanel panelClient=new JPanel();
-	private JPanel panelStats=new JPanel();
 	
 	private JPanel panelAjouter=new JPanel();
 	private JPanel panelLister=new JPanel();
@@ -58,9 +56,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JTable tabArticles = new JTable();
 	private JScrollPane scrollArticle = new JScrollPane();
 	private JTextField tfRecherche = new JTextField("");
-	
-	
-	//contruction des objet rechercher
 	private JLabel lbRechercher = new JLabel("Recherche : ");
 	
 	public VueArticle()
@@ -228,26 +223,21 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	{
 		if(e.getSource()==this.btClients)
 		{
-			this.panelClient.setVisible(true);
-			this.panelArticle.setVisible(false);
-			this.panelStats.setVisible(false);
+			new VueClient();
+			this.dispose();
 		}
 		else
 		{
 			if(e.getSource()==this.btArticle)
 			{
-				this.panelClient.setVisible(false);
-				this.panelArticle.setVisible(true);
-				this.panelStats.setVisible(false);
-				this.appelListe();
+				appelListe();
 			}
 			else
 			{
 				if(e.getSource()==this.btStats)
 				{
-					this.panelClient.setVisible(false);
-					this.panelArticle.setVisible(false);
-					this.panelStats.setVisible(true);
+					new VueStats();
+					this.dispose();
 				}
 				else
 				{

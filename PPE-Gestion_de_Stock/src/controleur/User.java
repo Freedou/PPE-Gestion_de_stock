@@ -5,9 +5,9 @@ public class User
 	private String raison_social, nom, prenom, mail, password, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville;
 	private boolean admin, gestionnaire;
 	private int nb_commande, id;
-	private float pannier_prix_total;
+	private float prix_total_panier;
 	
-	public User(int id, String raison_social, String nom, String prenom, String mail, String password, String fadresse1, String fadresse2, String fcp, String fville, String ladresse1, String ladresse2, String lcp, String lville, boolean admin, boolean gestionnaire, float pannier_prix_total, int nb_commande)
+	public User(int id, String raison_social, String nom, String prenom, String mail, String password, String fadresse1, String fadresse2, String fcp, String fville, String ladresse1, String ladresse2, String lcp, String lville, boolean admin, boolean gestionnaire, float prix_panier_total,int nb_commande)
 	{
 		this.id = id;
 		this.raison_social = raison_social;
@@ -25,16 +25,16 @@ public class User
 		this.lville = lville;
 		this.admin = admin;
 		this.gestionnaire = gestionnaire;
-		this.pannier_prix_total = pannier_prix_total;
+		this.prix_total_panier = prix_panier_total;
 		this.nb_commande = nb_commande;
 	}
 
-	public float getPannier_prix_total() {
-		return pannier_prix_total;
+	public float getPrix_total_panier() {
+		return prix_total_panier;
 	}
 
-	public void setPannier_prix_total(float pannier_prix_total) {
-		this.pannier_prix_total = pannier_prix_total;
+	public void setPrix_total_panier(float prix_total_panier) {
+		this.prix_total_panier = prix_total_panier;
 	}
 
 	public int getId() {

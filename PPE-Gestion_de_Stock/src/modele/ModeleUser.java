@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
-
 import controleur.User;
 
 public class ModeleUser {
@@ -37,9 +36,9 @@ public class ModeleUser {
                 String lville = unRes.getString("lville");
                 boolean admin = unRes.getBoolean("admin");
                 boolean gestionnaire = unRes.getBoolean("gestionnaire");
-                float pannier_prix_total = unRes.getFloat("panier_prix_total");
+                float panier_prix_total = unRes.getFloat("panier_prix_total");
                 int nb_commande = unRes.getInt("nb_commande");
-                User unArticle = new User (id, raison_sociale, nom, prenom, mail, mot_de_passe, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, pannier_prix_total, nb_commande);
+                User unArticle = new User (id, raison_sociale, nom, prenom, mail, mot_de_passe, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, panier_prix_total, nb_commande);
                 uneListe.add(unArticle);
             }
             unStat.close();
@@ -54,7 +53,7 @@ public class ModeleUser {
         return uneListe;
     }
     
-    public static String [] selectWhere (String email, String mdp)
+    public static String [] selectWhere(String email, String mdp)
     {
         //select where designation etc.
         String [] tab = new String [2];
@@ -134,7 +133,7 @@ public class ModeleUser {
         return uneListe;
     }
     
-    public static void insertUsers(User unUser)
+    public static void insertUser(User unUser)
     {
     	String requete ="INSERT INTO users(id, raison_social, nom, prenom, mail, password, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, nb_commande) VALUES ( '"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"', '"+unUser.getNb_commande()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
@@ -152,7 +151,7 @@ public class ModeleUser {
         uneBDD.seDeconnecter();
     }
     
-    public static int deleteClient(String id)
+    public static int deleteUser(int id)
 	{
     	int nb=0;
     	String requete="SELECT COUNT(*) FROM users WHERE id="+id+";";
@@ -179,7 +178,7 @@ public class ModeleUser {
     	return nb;
 	}
     
-    public static int updateClient(User unUser)
+    public static int updateUser(User unUser)
     {
     	
     	int nb=0;
