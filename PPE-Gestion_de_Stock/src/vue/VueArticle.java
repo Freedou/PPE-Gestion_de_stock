@@ -29,9 +29,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 {
 	
 	private JPanel panelMenu=new JPanel();
-	
 	private JPanel panelArticle=new JPanel();
-	private JPanel panelClient=new JPanel();
 	private JPanel panelStats=new JPanel();
 	
 	private JPanel panelAjouter=new JPanel();
@@ -45,10 +43,8 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	
 	private JButton btRechercher = new JButton("Rechercher");
 	private JButton btSupprimer = new JButton("Supprimer");
-	private JButton btModifier = new JButton("Modifier");
-	private JButton btRefresh = new JButton("Refresh");
 	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btAjouter = new JButton("Ajouter");
+	private JButton btAjouter = new JButton("Ajouter/modifier");
 	
 	//construction des objet ajouter
 	private JTextField tfId = new JTextField("");
@@ -62,8 +58,8 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	
 	//construction des objet lister
 	private JLabel lbLister= new JLabel("Liste des articles");
-	private JButton btFermer = new JButton("Fermer");
-	private JTable tabArticles;
+	private JTable tabArticles = new JTable();
+	private JScrollPane ScrollArticle = new JScrollPane();
 	
 	//contruction des objet rechercher
 	private JLabel lbRechercher = new JLabel("Recherche d'un article");
@@ -98,7 +94,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelBouton.add(new JLabel(""));
 		this.panelBouton.add(this.btAjouter);
 		this.panelBouton.add(this.btSupprimer);
-		this.panelBouton.add(this.btModifier);
 		this.panelBouton.add(this.btRechercher);
 		this.panelBouton.add(this.btAnnuler);
 		this.panelBouton.add(new JLabel(""));
@@ -135,10 +130,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelLister.setLayout(null);
 		this.lbLister.setBounds(100, 20, 100, 20);
 		this.panelLister.add(this.lbLister);
-		this.btFermer.setBounds(300, 10, 100, 20);
-		this.btRefresh.setBounds(400, 10, 100, 20);
-		this.panelLister.add(this.btRefresh);
-		this.panelLister.add(this.btFermer);
 		this.panelLister.setVisible(true);
 
 		//construction du panel gerer article
@@ -157,11 +148,41 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.btSupprimer.addActionListener(this);
 		this.btQuitter.addActionListener(this);
 		this.btAnnuler.addActionListener(this);
-		this.btFermer.addActionListener(this);
 		this.btOk.addActionListener(this);
-		this.btRefresh.addActionListener(this);
-		
+		this.btClients.addActionListener(this);
+		this.btStats.addActionListener(this);
 		this.setVisible(true);
+	}
+	
+	public void appelListe()
+	{
+		this.panelArticle.setVisible(true);
+		this.panelStats.setVisible(false);
+		
+		//this.tabArticles.repaint();
+		String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
+		LinkedList<Article> uneListe = Modele.selectAll();
+		Object donnees [][] = new Object[uneListe.size()][8];
+		int i = 0;
+		for(Article unArticle : uneListe)
+		{
+			donnees[i][0]=unArticle.getId();
+			donnees[i][1]=unArticle.getId_famille();
+			donnees[i][2]=unArticle.getId_sous_famille();
+			donnees[i][3]=unArticle.getNom();
+			donnees[i][4]=unArticle.getCode_article();
+			donnees[i][5]=unArticle.getDesignation();
+			donnees[i][6]=unArticle.getPrix_unitaire();
+			donnees[i][7]=unArticle.getQuantite();
+			i++;
+		}
+		DefaultTableModel dm = new DefaultTableModel(donnees, titres);
+		this.tabArticles.setModel(dm);
+		this.ScrollArticle.setViewportView(this.tabArticles);
+		this.tabArticles.addMouseListener(this);
+		this.ScrollArticle.setBounds(20, 50, 750, 190);
+		this.ScrollArticle.setVisible(true);
+		this.panelLister.add(ScrollArticle);
 	}
 	
 	public static void afficherArticle (String chaine)
@@ -214,53 +235,24 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	{
 		if(e.getSource()==this.btClients)
 		{
-			this.panelClient.setVisible(true);
-			this.panelArticle.setVisible(false);
-			this.panelStats.setVisible(false);
+			new VueClient();
+			this.dispose();
+			//this.panelClient.setVisible(true);
+			//this.panelArticle.setVisible(false);
+			//this.panelStats.setVisible(false);
 		}
 		else
 		{
 			if(e.getSource()==this.btArticle)
 			{
-				this.panelClient.setVisible(false);
-				this.panelArticle.setVisible(true);
-				this.panelLister.setVisible(false);
-				this.panelStats.setVisible(false);
-				
-				//this.tabArticles.repaint();
-				String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
-				LinkedList<Article> uneListe = Modele.selectAll();
-				Object donnees [][] = new Object[uneListe.size()][8];
-				int i = 0;
-				for(Article unArticle : uneListe)
-				{
-					donnees[i][0]=unArticle.getId();
-					donnees[i][1]=unArticle.getId_famille();
-					donnees[i][2]=unArticle.getId_sous_famille();
-					donnees[i][3]=unArticle.getNom();
-					donnees[i][4]=unArticle.getCode_article();
-					donnees[i][5]=unArticle.getDesignation();
-					donnees[i][6]=unArticle.getPrix_unitaire();
-					donnees[i][7]=unArticle.getQuantite();
-					i++;
-				}
-				DefaultTableModel dm = new DefaultTableModel(donnees, titres);
-				this.tabArticles = new JTable(dm);
-				this.tabArticles.addMouseListener(this);
-				JScrollPane uneScroll = new JScrollPane(this.tabArticles);
-				uneScroll.setBounds(20, 50, 750, 190);
-				uneScroll.setVisible(true);
-				this.panelLister.add(uneScroll);
-				dm.fireTableDataChanged();
-				this.panelLister.setVisible(true);
+				appelListe();
 			}
 			else
 			{
 				if(e.getSource()==this.btStats)
 				{
-					this.panelClient.setVisible(false);
-					this.panelArticle.setVisible(false);
-					this.panelStats.setVisible(true);
+					new VueStats();
+					this.dispose();
 				}
 				else
 				{
@@ -400,17 +392,12 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 											if(id!=0)
 											{
 												Modele.updateArticle(unArticle);
-
-												System.out.println("l'id est : "+id);
-												JOptionPane.showMessageDialog(this, "Modification réussi !");
 											}
 											else
 											{
-												Modele.insertArticle(unArticle);
-
-												System.out.println("l'id est : "+id);
-												JOptionPane.showMessageDialog(this, "Insertion réussi !");
+												Modele.insertArticle(unArticle);												
 											}
+											appelListe();
 										}
 										else
 										{
@@ -424,28 +411,13 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 								}
 								else
 								{
-									if(e.getSource()==this.btFermer)
+									if(e.getSource()==this.btOk)
 									{
-										this.panelLister.setVisible(false);
-									}
-									else if(e.getSource()==this.btRefresh)
-									{
-										
-									}
-									else
-									{
-										if(e.getSource()==this.btOk)
-										{
-											String chaine = this.cbxArticle.getSelectedItem().toString();
-											String tab[] = new String [5];
-											tab = chaine.split(" - ");
-											chaine = "\n\tId : " +tab[0]+"\n\tId_famille : " +tab[1]+"\n\tId_sous_famille : " +tab[2]+"\n\tNom : " +tab[3]+"\n\tCode_article : " +tab[4]+"\n\tDesignation : " +tab[5]+"\n\tPrix_unitaire : " +tab[6]+"\n\tQuantite : " +tab[7];
-											this.taResultat.setText(chaine);
-										}
-										else
-										{
-											
-										}
+										String chaine = this.cbxArticle.getSelectedItem().toString();
+										String tab[] = new String [5];
+										tab = chaine.split(" - ");
+										chaine = "\n\tId : " +tab[0]+"\n\tId_famille : " +tab[1]+"\n\tId_sous_famille : " +tab[2]+"\n\tNom : " +tab[3]+"\n\tCode_article : " +tab[4]+"\n\tDesignation : " +tab[5]+"\n\tPrix_unitaire : " +tab[6]+"\n\tQuantite : " +tab[7];
+										this.taResultat.setText(chaine);
 									}
 								}
 							}

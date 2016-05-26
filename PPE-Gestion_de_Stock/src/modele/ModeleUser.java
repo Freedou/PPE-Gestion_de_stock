@@ -3,7 +3,9 @@ package modele;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
+import controleur.Article;
 import controleur.User;
 
 public class ModeleUser {
@@ -40,6 +42,56 @@ public class ModeleUser {
         
         uneBDD.seDeconnecter();
         return tab;
+    }
+    
+    public static LinkedList<User> SelectAll()
+    {
+    	LinkedList<User> uneListe = new LinkedList<User>();
+        BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        uneBDD.seConnecter();
+        String requete ="SELECT * FROM users;";
+        try {
+            Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            while (unRes.next())
+            {
+                int id = unRes.getInt("id");
+                String raison_sociale = unRes.getString("raison_sociale");
+                String nom = unRes.getString("nom");
+                String prenom = unRes.getString("prenom");
+                String mail = unRes.getString("mail");
+                String mot_de_passe = unRes.getString("mot_de_passe");
+                String fadresse1 = unRes.getString("fadresse1");
+                String fadresse2 = unRes.getString("fadresse2");
+                String fcp = unRes.getString("fcp");
+                String fville = unRes.getString("fville");
+                String ladresse1 = unRes.getString("ladresse1");
+                String ladresse2 = unRes.getString("ladresse2");
+                String lcp = unRes.getString("lcp");
+                String lville = unRes.getString("lville");
+                boolean admin = unRes.getBoolean("admin");
+                boolean gestionnaire = unRes.getBoolean("gestionnaire");
+                float pannier_prix_total = unRes.getFloat("panier_prix_total");
+                int nb_commande = unRes.getInt("nb_commande");
+                User unArticle = new User (id, raison_sociale, nom, prenom, mail, mot_de_passe, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, pannier_prix_total, nb_commande);
+                uneListe.add(unArticle);
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        
+        uneBDD.seDeconnecter();
+        return uneListe;	
+    }
+    
+    public static int updateUser(User unUser)
+    {
+    	return 0;
     }
     
     public static void insertUsers(User unUser)

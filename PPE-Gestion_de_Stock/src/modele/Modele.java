@@ -1,10 +1,14 @@
 package modele;
 
 import java.util.LinkedList;
+
 import controleur.Article;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
 
 public class Modele {
     
@@ -55,11 +59,13 @@ public class Modele {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             unStat.execute(requete);
             unStat.close();
+            JOptionPane.showMessageDialog(null, "Insertion réussi !");
         }
         catch (SQLException exp)
         {
             System.out.println("Erreur de la requete : "+ requete);
         }
+        
         uneBDD.seDeconnecter();
     }
     
@@ -142,10 +148,11 @@ public class Modele {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE FROM articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
+            	requete="UPDATE articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
                 unStat.execute(requete);
             }
             unStat.close();
+            JOptionPane.showMessageDialog(null, "Modification réussi !");
         }
         catch (SQLException exp)
         {
