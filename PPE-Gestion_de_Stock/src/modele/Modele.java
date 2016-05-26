@@ -14,7 +14,7 @@ public class Modele {
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="Select * from articles;";
+        String requete ="SELECT * FROM articles;";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -47,7 +47,7 @@ public class Modele {
     public static void insertArticle(Article unArticle)
     {
         //inserer un produit dans la table articles
-        String requete ="insert into articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) values ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"','"+unArticle.getId_sous_famille()+"','"+unArticle.getNom()+"','"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";
+        String requete ="INSERT INTO articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) VALUES ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"','"+unArticle.getId_sous_famille()+"','"+unArticle.getNom()+"','"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -58,7 +58,7 @@ public class Modele {
         }
         catch (SQLException exp)
         {
-            System.out.println("Erreur de la requete : "+ requete);
+            System.out.println("Erreur de la requete : "+ requete+"\nLa requête a retourné : "+exp);
         }
         uneBDD.seDeconnecter();
     }
@@ -70,7 +70,7 @@ public class Modele {
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="select * from articles where reference like '%"+cle+"%'"+" or designation like '%"+cle+"%'"+" or categorie like '%"+cle+"%';";  
+        String requete ="SELECT * FROM articles WHERE nom LIKE '%"+cle+"%' OR designation LIKE '%"+cle+"%';";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -93,17 +93,17 @@ public class Modele {
         }
         catch (SQLException exp)
         {
-            System.out.println("Erreur d'execution :"+ requete);
+            System.out.println("Erreur d'execution :"+ requete+"\nLa requête a retourné : "+exp);
         }
         
         uneBDD.seDeconnecter();
         return uneListe;
     }
     
-    public static int deleteArticle(String id)
+    public static int deleteArticle(int id)
 	{
     	int nb=0;
-    	String requete="SELECT count(*) FROM articles WHERE id="+id+";";
+    	String requete="SELECT COUNT(*) FROM articles WHERE id="+id+";";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -121,7 +121,7 @@ public class Modele {
         }
         catch (SQLException exp)
         {
-            System.out.println("Erreur de la requete : "+ requete);
+            System.out.println("Erreur de la requete : "+ requete+"\nLa requête a retourné : "+exp);
         }
         uneBDD.seDeconnecter();
     	return nb;
@@ -131,7 +131,7 @@ public class Modele {
     {
     	
     	int nb=0;
-    	String requete="SELECT count(*) FROM articles WHERE id="+unArticle.getId()+";";
+    	String requete="SELECT COUNT(*) FROM articles WHERE id="+unArticle.getId()+";";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -142,7 +142,7 @@ public class Modele {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE FROM articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
+            	requete="UPDATE articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
                 unStat.execute(requete);
             }
             unStat.close();
