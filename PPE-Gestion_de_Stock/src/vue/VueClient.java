@@ -29,8 +29,6 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 
 	private JPanel panelMenu=new JPanel();
 	private JPanel panelClient=new JPanel();
-	private JPanel panelStats=new JPanel();
-	
 	private JPanel panelAjouter=new JPanel();
 	private JPanel panelLister=new JPanel();
 	private JPanel panelBouton=new JPanel();
@@ -44,12 +42,13 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 	private JButton btRechercher = new JButton("Rechercher");
 	private JButton btSupprimer = new JButton("Supprimer");
 	private JButton btAnnuler = new JButton("Annuler");
-	private JButton btAjouter = new JButton("Ajouter/modifier");
+	private JButton btAjouter = new JButton("Ajouter/Modifier");
 	
 	//construction des objet lister
-	private JLabel lbLister= new JLabel("Liste des clients");
-	private JTable tabClient = new JTable();
-	private JScrollPane ScrollClient = new JScrollPane();
+	 private JTable tabClient = new JTable();
+	 private JScrollPane ScrollClient = new JScrollPane();
+	 private JTextField tfRecherche = new JTextField("");
+	 private JLabel lbRechercher = new JLabel("Recherche : ");
 	
 	//construction des objet ajouter
 	private JTextField tfId = new JTextField("");
@@ -73,7 +72,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 	
 	public VueClient()
 	{
-		this.setTitle("Gestion des putes");
+		this.setTitle("Gestion des clients");
 		this.setBounds(200,200,1200,600);
 		this.setResizable(false);
 		this.setLayout(null);
@@ -146,13 +145,18 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		this.panelAjouter.add(new JLabel("Nb commandes :"));
 		this.panelAjouter.add(this.tfNbComm);
 		this.panelAjouter.setVisible(true);
-
+		
 		//construction du panel lister
 		this.panelLister.setBounds(0, 0, 900, 300);
 		this.panelLister.setBackground(Color.GRAY);
+		this.lbRechercher.setBounds(20, 20, 80, 20);
+		this.tfRecherche.setBounds(100, 20, 640, 20);
+		this.btRechercher.setBounds(760, 20, 120, 20);
+		this.ScrollClient.setBounds(20, 60, 860, 230);
+		this.panelLister.add(this.lbRechercher);
+		this.panelLister.add(this.tfRecherche);
+		this.panelLister.add(this.btRechercher);
 		this.panelLister.setLayout(null);
-		this.lbLister.setBounds(100, 20, 100, 20);
-		this.panelLister.add(this.lbLister);
 		this.panelLister.setVisible(true);
 		
 		//construction du panel gerer client
@@ -179,12 +183,9 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 	
 	public void appelListe()
 	{
-		this.panelClient.setVisible(true);
-		this.panelStats.setVisible(false);
-		
-		//this.tabArticles.repaint();
+		String cle = this.tfRecherche.getText();
 		String titres[] = {"id", "raison_social", "nom", "prenom", "mail", "mdp", "adresse F1", "adresse F2", "cp F", "ville F", "adresse L1", "adresse L2", "cp L", "ville L", "admin", "Gest", "prix_total_panier", "nb commandes"};
-		LinkedList<User> uneListe = ModeleUser.selectAll();
+		LinkedList<User> uneListe = ModeleUser.selectWhere(cle);
 		Object donnees [][] = new Object[uneListe.size()][18];
 		int i = 0;
 		for(User unUser : uneListe)
@@ -209,11 +210,10 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 			donnees[i][17]=unUser.getNb_commande();
 			i++;
 		}
+		this.tabClient.addMouseListener(this);
 		DefaultTableModel dm = new DefaultTableModel(donnees, titres);
 		this.tabClient.setModel(dm);
 		this.ScrollClient.setViewportView(this.tabClient);
-		this.tabClient.addMouseListener(this);
-		this.ScrollClient.setBounds(20, 50, 750, 190);
 		this.ScrollClient.setVisible(true);
 		this.panelLister.add(ScrollClient);
 	}
@@ -575,7 +575,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 										JOptionPane.showMessageDialog(this, "Erreur lors de l'insertion de l'article");
 									}
 								}
-							}
+								if(e.getSource()==btRechercher)
+								{
+									this.appelListe();
+						        }
+							} 
 						}
 					}
 				}
