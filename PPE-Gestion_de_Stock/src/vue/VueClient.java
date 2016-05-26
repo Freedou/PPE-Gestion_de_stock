@@ -157,14 +157,15 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		this.panelLister.add(this.lbLister);
 		this.panelLister.setVisible(true);
 		
-		//construction du panel gerer article
+		//construction du panel gerer client
 		this.panelClient.setBounds(150, 0, 1050, 600);
 		this.panelClient.setLayout(null);
 		this.panelClient.add(this.panelLister);
 		this.panelClient.add(this.panelAjouter);
 		this.panelClient.add(this.panelBouton);
-		this.panelClient.setVisible(false);
 		this.add(this.panelClient);
+		this.appelListe();
+		this.panelClient.setVisible(true);
 			
 		//rendre les bouton clickable
 		this.btAjouter.addActionListener(this);
@@ -299,9 +300,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		
 		if(e.getSource()==this.btClients)
 		{
-			
 			appelListe();
-			
 		}
 		else
 		{
@@ -340,6 +339,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 						{
 							JOptionPane.showMessageDialog(this, "Erreur veuillez selectionner un article pour le supprimer.");
 						}
+						this.appelListe();
 					}
 					else
 					{
@@ -565,7 +565,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 											{
 												ModeleUser.insertUser(unUser);												
 											}
-											appelListe();
+											this.appelListe();
 										}
 										else
 										{

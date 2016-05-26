@@ -132,8 +132,9 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelArticle.add(this.panelLister);
 		this.panelArticle.add(this.panelAjouter);
 		this.panelArticle.add(this.panelBouton);
-		this.panelArticle.setVisible(false);
 		this.add(this.panelArticle);
+		this.panelArticle.setVisible(true);
+		this.appelListe();
 		
 		//rendre les bouton clickable
 		this.btAjouter.addActionListener(this);
@@ -142,6 +143,8 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.btSupprimer.addActionListener(this);
 		this.btQuitter.addActionListener(this);
 		this.btAnnuler.addActionListener(this);
+		this.btClients.addActionListener(this);
+		this.btStats.addActionListener(this);
 		
 		this.setVisible(true);
 	}
@@ -262,6 +265,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 						{
 							JOptionPane.showMessageDialog(this, "Erreur vous devez selectionner un article pour le supprimer.");
 						}
+						this.appelListe();
 					}
 					else
 					{
@@ -399,6 +403,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 												Modele.insertArticle(unArticle);
 												JOptionPane.showMessageDialog(this, "Insertion réussi !");
 											}
+											this.appelListe();
 										}
 										else
 										{
