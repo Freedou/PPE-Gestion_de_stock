@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,10 +28,11 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 	private JButton btClients = new JButton("Gerer clients");
 	private JButton btStats = new JButton("Voir statistiques");
 	private JButton btQuitter = new JButton("Quitter");
-		
+	//@SuppressWarnings({"rawtypes"})	
 	//construction des objet lister
 	private JTable tabStats = new JTable();
 	private JScrollPane ScrollStats = new JScrollPane();
+	private JComboBox cbxStats= new JComboBox();
 	
 	public VueStats()
 	{
@@ -53,21 +55,33 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.setVisible(true);
 		
 		//construction du panel statistique
-		this.panelStats.setBounds(0, 0, 900, 300);
+		this.panelStats.setBounds(150, 0, 1050, 600);
+		this.panelStats.setLayout(null);
 		this.panelStats.setBackground(Color.GRAY);
 		this.ScrollStats.setBounds(20, 60, 860, 230);
-		this.panelStats.setLayout(null);
+		this.cbxStats.setBounds(10, 60, 500, 20);
+		this.remplirCbx();
+		this.panelStats.add(this.cbxStats);
 		this.panelStats.setVisible(true);		
+		this.add(panelStats);
+
+		
 		
 		//rendre les bouton clickable
 		this.btArticle.addActionListener(this);
 		this.btQuitter.addActionListener(this);
 		this.btClients.addActionListener(this);
 		this.btStats.addActionListener(this);
+		this.cbxStats.addActionListener(this);
 		this.setVisible(true);
 	}
 	
-	
+	public void remplirCbx()
+	{
+		this.cbxStats.removeAllItems();
+		this.cbxStats.addItem("");
+		this.cbxStats.addItem("Stats nb commande");
+	}
 	
 	
 	
@@ -127,6 +141,21 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 						if(r==0)
 						{
 							this.dispose();
+						}
+					}
+					else
+					{
+						if(e.getSource()==this.cbxStats)
+						{
+							switch(this.cbxStats.getSelectedItem()+"")
+							{
+							case "Stats nb commande" : System.out.println("tamerlane");
+							break;
+							default : break;
+							}
+							
+							
+							
 						}
 					}
 				}
