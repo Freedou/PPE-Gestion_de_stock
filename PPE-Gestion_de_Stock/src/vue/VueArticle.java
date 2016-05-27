@@ -401,7 +401,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 											else
 											{
 												Modele.insertArticle(unArticle);
-												JOptionPane.showMessageDialog(this, "Insertion réussi !");
 											}
 											this.appelListe();
 										}
