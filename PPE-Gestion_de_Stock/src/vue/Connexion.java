@@ -30,8 +30,8 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
     
     public Connexion() {
         this.setBounds(200,200,400,200);
-        this.setTitle("Connexion Ã  la gestion de stock");
-        this.setResizable(true);
+        this.setTitle("Connexion à la gestion de stock");
+        this.setResizable(false);
         this.setLayout(null);
         
         //placement des objets dans le panel
@@ -71,7 +71,7 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
                 String email = this.tfEmail.getText();
                 String mdp = new String(this.tfMdp.getPassword());   //recup le mdp
                 //test de connexion
-                String tab[] = ModeleUser.selectWhere(email, mdp);
+                String tab[] = ModeleUser.selectConnect(email, mdp);
                 if (tab[0]==null)
                 {
                     JOptionPane.showMessageDialog(null, "Impossible de se connecter", "Erreur", JOptionPane.ERROR_MESSAGE);

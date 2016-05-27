@@ -53,14 +53,14 @@ public class ModeleUser {
         return uneListe;
     }
     
-    public static String [] selectWhere(String email, String mdp)
+    public static String [] selectConnect(String email, String mdp)
     {
         //select where designation etc.
         String [] tab = new String [2];
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT COUNT(mail) AS nb, nom, prenom FROM users WHERE mail ='"+email+"' AND mot_de_passe ='"+mdp+"';";  
+        String requete ="SELECT COUNT(mail) AS nb, nom, prenom FROM users WHERE mail ='"+email+"' AND mot_de_passe ='"+mdp+"' AND (admin = 1 OR gestionnaire = 1);";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
