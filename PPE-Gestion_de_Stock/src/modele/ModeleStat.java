@@ -3,25 +3,21 @@ package modele;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import controleur.User;
 
 public class ModeleStat {
 
-	public Object ListerNbCommande()
+	public static Object[][] ListerNbCommande()
 	{
+		Object stats[][] = null;
 		String requete = "SELECT * FROM Stats_site";
 		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
-        uneBDD.seConnecter();
-		
         try {
-            Statement unStat = uneBDD.getMaconnexion().createStatement();
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
-            Object stats [][]= new Object[unRes.getFetchSize()][5];
+            unRes.last();
+            stats = new Object[unRes.getRow()][5];
+            unRes.beforeFirst();
             int i = 0;
             while (unRes.next())
             {
@@ -34,15 +30,12 @@ public class ModeleStat {
             }
             unStat.close();
             unRes.close();
-           
-            
         }
         catch (SQLException exp)
         {
             System.out.println("Erreur d'execution :"+ exp);
         }
         uneBDD.seDeconnecter();
-        return stats;
+		return stats;
 	}
-	
 }

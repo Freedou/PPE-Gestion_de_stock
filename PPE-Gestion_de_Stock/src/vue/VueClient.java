@@ -46,7 +46,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 	
 	//construction des objet lister
 	 private JTable tabClient = new JTable();
-	 private JScrollPane ScrollClient = new JScrollPane();
+	 private JScrollPane scrollClient = new JScrollPane();
 	 private JTextField tfRecherche = new JTextField("");
 	 private JLabel lbRechercher = new JLabel("Recherche : ");
 	
@@ -152,7 +152,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		this.lbRechercher.setBounds(20, 20, 80, 20);
 		this.tfRecherche.setBounds(100, 20, 640, 20);
 		this.btRechercher.setBounds(760, 20, 120, 20);
-		this.ScrollClient.setBounds(20, 60, 860, 230);
+		this.scrollClient.setBounds(20, 60, 860, 230);
 		this.panelLister.add(this.lbRechercher);
 		this.panelLister.add(this.tfRecherche);
 		this.panelLister.add(this.btRechercher);
@@ -213,9 +213,9 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		this.tabClient.addMouseListener(this);
 		DefaultTableModel dm = new DefaultTableModel(donnees, titres);
 		this.tabClient.setModel(dm);
-		this.ScrollClient.setViewportView(this.tabClient);
-		this.ScrollClient.setVisible(true);
-		this.panelLister.add(ScrollClient);
+		this.scrollClient.setViewportView(this.tabClient);
+		this.scrollClient.setVisible(true);
+		this.panelLister.add(scrollClient);
 	}
 
 	@Override

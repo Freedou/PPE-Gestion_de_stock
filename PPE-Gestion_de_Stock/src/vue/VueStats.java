@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import modele.ModeleStat;
 
 @SuppressWarnings({ "serial" })
 public class VueStats extends JFrame implements ActionListener, MouseListener{
@@ -31,7 +34,8 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 	//@SuppressWarnings({"rawtypes"})	
 	//construction des objet lister
 	private JTable tabStats = new JTable();
-	private JScrollPane ScrollStats = new JScrollPane();
+	private JScrollPane scrollStats = new JScrollPane();
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbxStats= new JComboBox();
 	
 	public VueStats()
@@ -58,8 +62,8 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.panelStats.setBounds(150, 0, 1050, 600);
 		this.panelStats.setLayout(null);
 		this.panelStats.setBackground(Color.GRAY);
-		this.ScrollStats.setBounds(20, 60, 860, 230);
-		this.cbxStats.setBounds(10, 60, 500, 20);
+		this.scrollStats.setBounds(10, 40, 1000, 500);
+		this.cbxStats.setBounds(10, 10, 1000, 20);
 		this.remplirCbx();
 		this.panelStats.add(this.cbxStats);
 		this.panelStats.setVisible(true);		
@@ -76,6 +80,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void remplirCbx()
 	{
 		this.cbxStats.removeAllItems();
@@ -149,7 +154,15 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 						{
 							switch(this.cbxStats.getSelectedItem()+"")
 							{
-							case "Stats nb commande" : System.out.println("tamerlane");
+							case "Stats nb commande" :
+								Object donnees[][] = ModeleStat.ListerNbCommande();
+								String titres[] = {"Id", "Nom", "Prenom", "Nb commandes", "Nb Articles"};
+								this.tabStats.addMouseListener(this);
+								DefaultTableModel dm = new DefaultTableModel(donnees, titres);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
 							break;
 							default : break;
 							}
