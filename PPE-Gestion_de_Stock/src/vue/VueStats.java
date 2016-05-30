@@ -86,6 +86,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.cbxStats.removeAllItems();
 		this.cbxStats.addItem("");
 		this.cbxStats.addItem("Stats nb commande");
+		this.cbxStats.addItem("users par ordre alphabetique");
 	}
 	
 	
@@ -152,18 +153,30 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 					{
 						if(e.getSource()==this.cbxStats)
 						{
+							Object donnees[][] = null;
+							DefaultTableModel dm = null;
 							switch(this.cbxStats.getSelectedItem()+"")
 							{
 							case "Stats nb commande" :
-								Object donnees[][] = ModeleStat.ListerNbCommande();
+								donnees = ModeleStat.ListerNbCommande();
 								String titres[] = {"Id", "Nom", "Prenom", "Nb commandes", "Nb Articles"};
 								this.tabStats.addMouseListener(this);
-								DefaultTableModel dm = new DefaultTableModel(donnees, titres);
+								dm = new DefaultTableModel(donnees, titres);
 								this.tabStats.setModel(dm);
 								this.scrollStats.setViewportView(this.tabStats);
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
-							break;
+								break;
+							case "users par ordre alphabetique" :
+								donnees = ModeleStat.Listerproc1();
+								String titres1[] = {"Id", "Nom", "Prenom", "mail"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres1);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
 							default : break;
 							}
 							
