@@ -159,5 +159,4 @@ public class Modele {
         uneBDD.seDeconnecter();
     	return nb;
     }
-    
 }

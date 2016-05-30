@@ -41,6 +41,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JButton btSupprimer = new JButton("Supprimer");
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btAjouter = new JButton("Ajouter/Modifier");
+	private JButton btFamille = new JButton("Lister les familles");
 	
 	//construction des objet ajouter
 	private JTextField tfId = new JTextField("");
@@ -85,6 +86,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.panelBouton.add(this.btAjouter);
 		this.panelBouton.add(this.btSupprimer);
 		this.panelBouton.add(this.btAnnuler);
+		this.panelBouton.add(this.btFamille);
 		this.panelBouton.add(new JLabel(""));
 		this.panelBouton.setVisible(true);
 		
@@ -145,6 +147,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		this.btAnnuler.addActionListener(this);
 		this.btClients.addActionListener(this);
 		this.btStats.addActionListener(this);
+		this.btFamille.addActionListener(this);
 		
 		this.setVisible(true);
 	}
@@ -396,7 +399,6 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 											if(id!=0)
 											{
 												Modele.updateArticle(unArticle);
-												JOptionPane.showMessageDialog(this, "Modification réussi !");
 											}
 											else
 											{
@@ -419,6 +421,13 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 									if(e.getSource()==btRechercher)
 									{
 										this.appelListe();
+									}
+									else
+									{
+										if(e.getSource()==btFamille)
+										{
+											new VueFamilles();
+										}
 									}
 								}
 							}
