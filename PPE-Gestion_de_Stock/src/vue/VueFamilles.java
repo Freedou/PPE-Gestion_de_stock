@@ -20,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.Famille;
 import controleur.SousFamille;
-import modele.Modele;
 import modele.ModeleFamille;
 import modele.ModeleSousFamille;
 
