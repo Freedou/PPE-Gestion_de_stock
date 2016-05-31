@@ -74,7 +74,7 @@ public class Modele {
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM articles WHERE nom LIKE '%"+cle+"%' OR designation LIKE '%"+cle+"%';";  
+        String requete ="call modeleA_SW('"+cle+"');";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);

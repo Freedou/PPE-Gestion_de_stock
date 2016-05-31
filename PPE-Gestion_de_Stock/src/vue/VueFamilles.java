@@ -82,26 +82,32 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 		this.panelAjouter.add(new JLabel("Famille :"));
 		this.panelAjouter.add(new JLabel(""));
 		this.panelAjouter.add(new JLabel("Sous Famille :"));
+		
 		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfId);
 		this.tfId.setEditable(false);
 		this.tfId.setBackground(Color.gray);
+		
 		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfIdSousFamille);
 		this.tfIdSousFamille.setEditable(false);
 		this.tfIdSousFamille.setBackground(Color.gray);
+		
 		this.panelAjouter.add(new JLabel("Nom :"));
 		this.panelAjouter.add(this.tfNomFamille);
+		
 		this.panelAjouter.add(new JLabel("Id famille :"));
 		this.panelAjouter.add(this.tfIdFamille);
-		this.tfIdFamille.setEditable(false);
-		this.tfIdFamille.setBackground(Color.gray);
+		
 		this.panelAjouter.add(new JLabel("Commentaire :"));
 		this.panelAjouter.add(this.tfCommentaireFamille);
+		
 		this.panelAjouter.add(new JLabel("Nom :"));
 		this.panelAjouter.add(this.tfNomSousFamille);
+		
 		this.panelAjouter.add(new JLabel(""));
 		this.panelAjouter.add(new JLabel(""));
+		
 		this.panelAjouter.add(new JLabel("Commentaire :"));
 		this.panelAjouter.add(this.tfCommentaireSousFamille);
 		
@@ -201,7 +207,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 		    	  this.tfIdSousFamille.setText(this.tabSousFamille.getValueAt(row, 0)+"");
 			      this.tfIdSousFamille.setBackground(Color.gray);
 		    	  this.tfIdFamille.setText(this.tabSousFamille.getValueAt(row, 1)+"");
-			      this.tfIdFamille.setBackground(Color.gray);
+			      this.tfIdFamille.setBackground(Color.white);
 		    	  this.tfNomSousFamille.setText(this.tabSousFamille.getValueAt(row, 2)+"");
 			      this.tfNomSousFamille.setBackground(Color.white);
 		    	  this.tfCommentaireSousFamille.setText(this.tabSousFamille.getValueAt(row, 3)+"");
@@ -260,7 +266,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 				this.tfCommentaireFamille.setText("");
 				this.tfCommentaireSousFamille.setText("");
 				this.tfId.setBackground(Color.GRAY);
-				this.tfIdFamille.setBackground(Color.GRAY);
+				this.tfIdFamille.setBackground(Color.WHITE);
 				this.tfIdSousFamille.setBackground(Color.GRAY);
 				this.tfNomFamille.setBackground(Color.white);
 				this.tfNomSousFamille.setBackground(Color.white);
@@ -276,6 +282,11 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 					try{
 						idF=Integer.parseInt(this.tfId.getText());
 						this.tfId.setBackground(Color.GRAY);
+					}
+					catch(Exception exp)
+					{
+					}
+					try{
 						idSF=Integer.parseInt(this.tfIdSousFamille.getText());
 						this.tfIdSousFamille.setBackground(Color.GRAY);
 					}
@@ -325,6 +336,8 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 						}
 						catch(Exception exp)
 						{
+							okF = false;
+							this.tfIdFamille.setBackground(Color.red);
 						}
 						try{
 							idSF=Integer.parseInt(this.tfIdSousFamille.getText());

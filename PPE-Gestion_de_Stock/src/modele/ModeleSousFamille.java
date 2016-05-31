@@ -17,7 +17,7 @@ public class ModeleSousFamille
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM sous_familles;";
+        String requete ="call modeleSF_SA()";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -46,7 +46,7 @@ public class ModeleSousFamille
     public static void insertSousFamille(SousFamille unSousFamille)
     {
         //inserer un produit dans la table SousFamilles
-        String requete ="INSERT INTO sous_familles(id, id_famille, nom, commentaire) VALUES ('"+unSousFamille.getId()+"','"+unSousFamille.getIdFamille()+"','"+unSousFamille.getNom()+"','"+unSousFamille.getCommentaire()+"');";
+        String requete ="call modeleSF_I('"+unSousFamille.getId()+"','"+unSousFamille.getIdFamille()+"','"+unSousFamille.getNom()+"','"+unSousFamille.getCommentaire()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -66,7 +66,7 @@ public class ModeleSousFamille
     public static int deleteSousFamille(int id)
 	{
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM sous_familles WHERE id="+id+";";
+    	String requete="call modeleSF_D1('"+id+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -77,7 +77,7 @@ public class ModeleSousFamille
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="DELETE FROM sous_familles WHERE id="+id+";";
+            	requete="call modeleSF_D2('"+id+"');";
                 unStat.execute(requete);
             }
             unStat.close();
@@ -94,7 +94,7 @@ public class ModeleSousFamille
     {
     	
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM sous_familles WHERE id="+unSousFamille.getId()+";";
+    	String requete="call modeleSF_U1('"+unSousFamille.getId()+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -105,7 +105,7 @@ public class ModeleSousFamille
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE sous_familles SET nom='"+unSousFamille.getNom()+"', commentaire='"+unSousFamille.getCommentaire()+"' WHERE id='"+unSousFamille.getId()+"';";
+            	requete="call modeleSF_U2('"+unSousFamille.getId()+"','"+unSousFamille.getIdFamille()+"','"+unSousFamille.getNom()+"','"+unSousFamille.getCommentaire()+"');";
                 unStat.execute(requete);
             }
             unStat.close();
