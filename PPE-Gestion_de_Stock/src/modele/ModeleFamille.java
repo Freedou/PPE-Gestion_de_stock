@@ -17,7 +17,7 @@ public class ModeleFamille
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM Familles;";
+        String requete ="CALL modeleF_SA();";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -42,10 +42,10 @@ public class ModeleFamille
         return uneListe;
     }
     
-    public static void insertFamille(Famille unFamille)
+    public static void insertFamille(Famille uneFamille)
     {
         //inserer un produit dans la table Familles
-        String requete ="INSERT INTO Familles(id, nom, commentaire) VALUES ('"+unFamille.getId()+"','"+unFamille.getNom()+"','"+unFamille.getCommentaire()+"');";
+        String requete ="CALL modeleF_I('"+uneFamille.getId()+"','"+uneFamille.getNom()+"','"+uneFamille.getCommentaire()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -65,7 +65,7 @@ public class ModeleFamille
     public static int deleteFamille(int id)
 	{
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM Familles WHERE id="+id+";";
+    	String requete="CALL modeleF_D1('"+id+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -76,7 +76,7 @@ public class ModeleFamille
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="DELETE FROM Familles WHERE id="+id+";";
+            	requete="CALL modeleF_D2('"+id+"');";
                 unStat.execute(requete);
             }
             unStat.close();
@@ -89,11 +89,11 @@ public class ModeleFamille
     	return nb;
 	}
     
-    public static int updateFamille(Famille unFamille)
+    public static int updateFamille(Famille uneFamille)
     {
     	
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM Familles WHERE id="+unFamille.getId()+";";
+    	String requete="CALL modeleF_U1('"+uneFamille.getId()+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -104,7 +104,7 @@ public class ModeleFamille
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE Familles SET nom='"+unFamille.getNom()+"', commentaire='"+unFamille.getCommentaire()+"' WHERE id='"+unFamille.getId()+"';";
+            	requete="CALL modeleF_U2('"+uneFamille.getNom()+"', '"+uneFamille.getCommentaire()+"', '"+uneFamille.getId()+"');";
                 unStat.execute(requete);
             }
             unStat.close();
