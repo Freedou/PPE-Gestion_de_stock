@@ -193,7 +193,7 @@ public class ModeleUser {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE users SET raison_social='"+unUser.getRaison_social()+"', nom='"+unUser.getNom()+"', prenom='"+unUser.getPrenom()+"', mail='"+unUser.getMail()+"', password='"+unUser.getPassword()+"', fadresse1='"+unUser.getFadresse1()+"', fadresse2='"+unUser.getFadresse2()+"', fcp='"+unUser.getFcp()+"', fville='"+unUser.getFville()+"', fadresse1='"+unUser.getLadresse1()+"', fadresse2='"+unUser.getLadresse2()+"', lcp='"+unUser.getLcp()+"', lville='"+unUser.getLville()+"', admin='"+unUser.isAdmin()+"', gestionnaire='"+unUser.isGestionnaire()+"', nb_commande='"+unUser.getNb_commande()+"' WHERE id='"+unUser.getId()+"';";
+            	requete="UPDATE users SET raison_social='"+unUser.getRaison_social()+"', nom='"+unUser.getNom()+"', prenom='"+unUser.getPrenom()+"', mail='"+unUser.getMail()+"', password='"+unUser.getPassword()+"', fadresse1='"+unUser.getFadresse1()+"', fadresse2='"+unUser.getFadresse2()+"', fcp='"+unUser.getFcp()+"', fville='"+unUser.getFville()+"', ladresse1='"+unUser.getLadresse1()+"', ladresse2='"+unUser.getLadresse2()+"', lcp='"+unUser.getLcp()+"', lville='"+unUser.getLville()+"', admin='"+unUser.isAdmin()+"', gestionnaire='"+unUser.isGestionnaire()+"', nb_commande='"+unUser.getNb_commande()+"' WHERE id='"+unUser.getId()+"';";
                 unStat.execute(requete);
             }
             unStat.close();
