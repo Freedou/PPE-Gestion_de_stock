@@ -17,7 +17,7 @@ public class Modele {
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM articles;";
+        String requete ="call modeleA_SA();";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -50,7 +50,7 @@ public class Modele {
     public static void insertArticle(Article unArticle)
     {
         //inserer un produit dans la table articles
-        String requete ="INSERT INTO articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) VALUES ('"+unArticle.getId()+"','"+unArticle.getId_famille()+"','"+unArticle.getId_sous_famille()+"','"+unArticle.getNom()+"','"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"');";
+        String requete ="call modeleA_I('"+unArticle.getId_famille()+"','"+unArticle.getId_sous_famille()+"','"+unArticle.getNom()+"','"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"','"+unArticle.getId()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -107,7 +107,7 @@ public class Modele {
     public static int deleteArticle(int id)
 	{
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM articles WHERE id="+id+";";
+    	String requete="call modeleA_D1('"+id+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -118,7 +118,7 @@ public class Modele {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="DELETE FROM articles WHERE id="+id+";";
+            	requete="call modeleA_D2('"+id+"');";
                 unStat.execute(requete);
             }
             unStat.close();
@@ -135,7 +135,7 @@ public class Modele {
     {
     	
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM articles WHERE id="+unArticle.getId()+";";
+    	String requete="call modeleA_U1('"+unArticle.getId()+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -146,7 +146,7 @@ public class Modele {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE articles SET id_famille='"+unArticle.getId_famille()+"', id_sous_famille='"+unArticle.getId_sous_famille()+"', nom='"+unArticle.getNom()+"', code_article='"+unArticle.getCode_article()+"', designation='"+unArticle.getDesignation()+"', prix_unitaire='"+unArticle.getPrix_unitaire()+"', quantite='"+unArticle.getQuantite()+"' WHERE id='"+unArticle.getId()+"';";
+            	requete="call modeleA_U2('"+unArticle.getId_famille()+"', '"+unArticle.getId_sous_famille()+"', '"+unArticle.getNom()+"', '"+unArticle.getCode_article()+"', '"+unArticle.getDesignation()+"', '"+unArticle.getPrix_unitaire()+"', '"+unArticle.getQuantite()+"', '"+unArticle.getId()+"');";
                 unStat.execute(requete);
             }
             unStat.close();
