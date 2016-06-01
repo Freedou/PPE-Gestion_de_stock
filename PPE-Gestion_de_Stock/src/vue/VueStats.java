@@ -204,7 +204,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.panelStats.add(scrollStats);
 								break;
 							case "Client par nombre de commande croissant" :
-								donnees = ModeleStat.ProcArtPrixDESC();
+								donnees = ModeleStat.ProcUsrNbCommASC();
 								String titres4[] = {"Id", "Nom", "Prenom", "Nb commande"};
 								this.tabStats.addMouseListener(this);
 								dm = new DefaultTableModel(donnees, titres4);
@@ -214,7 +214,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.panelStats.add(scrollStats);
 								break;
 							case "Client par nombre de commande decroissant" :
-								donnees = ModeleStat.ProcArtPrixDESC();
+								donnees = ModeleStat.ProcUsrNbCommDESC();
 								String titres5[] = {"Id", "Nom", "Prenom", "Nb commande"};
 								this.tabStats.addMouseListener(this);
 								dm = new DefaultTableModel(donnees, titres5);
@@ -224,7 +224,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.panelStats.add(scrollStats);
 								break;
 							case "Client par nombre d'article croissant" :
-								donnees = ModeleStat.ProcArtPrixDESC();
+								donnees = ModeleStat.ProcUsrNbArtASC();
 								String titres6[] = {"Id", "Nom", "Prenom", "Nb articles"};
 								this.tabStats.addMouseListener(this);
 								dm = new DefaultTableModel(donnees, titres6);
@@ -234,7 +234,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.panelStats.add(scrollStats);
 								break;
 							case "Client par nombre d'article decroissant" :
-								donnees = ModeleStat.ProcArtPrixDESC();
+								donnees = ModeleStat.ProcUsrNbArtDESC();
 								String titres7[] = {"Id", "Nom", "Prenom", "Nb articles"};
 								this.tabStats.addMouseListener(this);
 								dm = new DefaultTableModel(donnees, titres7);
