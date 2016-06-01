@@ -262,4 +262,189 @@ public class ModeleStat {
         uneBDD.seDeconnecter();
 		return stats;
 	}
+	
+	public static Object[][] ProcArtPlusComm()
+	{
+		Object stats[][] = null;
+		String requete = "call procArtPlusComm()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][3];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("id");
+            	stats[i][1]=unRes.getString("nom");
+            	stats[i][2]=unRes.getString("totalArticles");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
+	
+	public static Object[][] ProcClientOk()
+	{
+		Object stats[][] = null;
+		String requete = "call procClientsOk()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][3];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("id");
+            	stats[i][1]=unRes.getString("nom");
+            	stats[i][2]=unRes.getString("prenom");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
+	
+	public static Object[][] ProcClientNotOk()
+	{
+		Object stats[][] = null;
+		String requete = "call procClientsPasOk()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][3];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("id");
+            	stats[i][1]=unRes.getString("nom");
+            	stats[i][2]=unRes.getString("prenom");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
+	
+	public static Object[][] ProcNbCommJour()
+	{
+		Object stats[][] = null;
+		String requete = "call procNbCommJour()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][2];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("nbComm");
+            	stats[i][1]=unRes.getString("dateJour");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
+	
+	public static Object[][] ProcNbCommMois()
+	{
+		Object stats[][] = null;
+		String requete = "call procNbCommMois()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][2];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("nbComm");
+            	stats[i][1]=unRes.getString("dateMois");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
+	
+	public static Object[][] ProcUsrMaxDepense()
+	{
+		Object stats[][] = null;
+		String requete = "call procUsrPlusDepense()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][4];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("id");
+            	stats[i][1]=unRes.getString("nom");
+            	stats[i][2]=unRes.getString("prenom");
+            	stats[i][3]=unRes.getString("panier_prix_total");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
 }

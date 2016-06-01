@@ -89,10 +89,16 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.cbxStats.addItem("Users par ordre alphabetique");
 		this.cbxStats.addItem("Article par prix croissant");
 		this.cbxStats.addItem("Article par prix decroissant");
-		this.cbxStats.addItem("Client par nombre de commande croissant");
-		this.cbxStats.addItem("Client par nombre de commande decroissant");
-		this.cbxStats.addItem("Client par nombre d'article croissant");
-		this.cbxStats.addItem("Client par nombre d'article decroissant");
+		this.cbxStats.addItem("Client par nombre de commandes croissant");
+		this.cbxStats.addItem("Client par nombre de commandes decroissant");
+		this.cbxStats.addItem("Client par nombre d'articles croissant");
+		this.cbxStats.addItem("Client par nombre d'articles decroissant");
+		this.cbxStats.addItem("Article le plus commande");
+		this.cbxStats.addItem("Clients ayant deja valide une commande");
+		this.cbxStats.addItem("Clients n'ayant pas valide de commande");
+		this.cbxStats.addItem("Nombre de commandes ce jour");
+		this.cbxStats.addItem("Nombre de commandes ce mois");
+		this.cbxStats.addItem("Les clients ayant depense le plus");
 	}
 	
 	
@@ -203,7 +209,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							case "Client par nombre de commande croissant" :
+							case "Client par nombre de commandes croissant" :
 								donnees = ModeleStat.ProcUsrNbCommASC();
 								String titres4[] = {"Id", "Nom", "Prenom", "Nb commande"};
 								this.tabStats.addMouseListener(this);
@@ -213,7 +219,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							case "Client par nombre de commande decroissant" :
+							case "Client par nombre de commandes decroissant" :
 								donnees = ModeleStat.ProcUsrNbCommDESC();
 								String titres5[] = {"Id", "Nom", "Prenom", "Nb commande"};
 								this.tabStats.addMouseListener(this);
@@ -223,7 +229,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							case "Client par nombre d'article croissant" :
+							case "Client par nombre d'articles croissant" :
 								donnees = ModeleStat.ProcUsrNbArtASC();
 								String titres6[] = {"Id", "Nom", "Prenom", "Nb articles"};
 								this.tabStats.addMouseListener(this);
@@ -233,11 +239,71 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							case "Client par nombre d'article decroissant" :
+							case "Client par nombre d'articles decroissant" :
 								donnees = ModeleStat.ProcUsrNbArtDESC();
 								String titres7[] = {"Id", "Nom", "Prenom", "Nb articles"};
 								this.tabStats.addMouseListener(this);
 								dm = new DefaultTableModel(donnees, titres7);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Article le plus commande":
+								donnees = ModeleStat.ProcArtPlusComm();
+								String titres8[] = {"Id", "Nom", "Total d'article"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres8);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Clients ayant deja valide une commande":
+								donnees = ModeleStat.ProcClientOk();
+								String titres9[] = {"Id", "Nom", "Prenom"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres9);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Clients n'ayant pas valide de commande":
+								donnees = ModeleStat.ProcClientNotOk();
+								String titres10[] = {"Id", "Nom", "Prenom"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres10);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Nombre de commandes ce jour":
+								donnees = ModeleStat.ProcNbCommJour();
+								String titres11[] = {"Nombre de commande", "Date du jour"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres11);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Nombre de commandes ce mois":
+								donnees = ModeleStat.ProcNbCommMois();
+								String titres12[] = {"Nombre de commande", "Mois en cours"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres12);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Les clients ayant depense le plus":
+								donnees = ModeleStat.ProcUsrMaxDepense();
+								String titres13[] = {"Id", "Nom", "Prenom", "Dépense totale"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres13);
 								this.tabStats.setModel(dm);
 								this.scrollStats.setViewportView(this.tabStats);
 								this.scrollStats.setVisible(true);
