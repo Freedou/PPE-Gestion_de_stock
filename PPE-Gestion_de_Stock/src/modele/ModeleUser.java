@@ -14,7 +14,7 @@ public class ModeleUser {
         BDD uneBDD = new BDD("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM users;";
+        String requete ="call modeleU_SA();";
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -60,7 +60,7 @@ public class ModeleUser {
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT COUNT(mail) AS nb, nom, prenom FROM users WHERE mail ='"+email+"' AND mot_de_passe ='"+mdp+"' AND (admin = 1 OR gestionnaire = 1);";  
+        String requete ="call modeleU_SC('"+email+"','"+mdp+"');";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -94,7 +94,7 @@ public class ModeleUser {
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
-        String requete ="SELECT * FROM users WHERE nom LIKE '%"+cle+"%'"+" OR prenom LIKE '%"+cle+"%'"+" OR mail LIKE '%"+cle+"%';";  
+        String requete ="call modeleU_SW('"+cle+"');";  
         try {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             ResultSet unRes = unStat.executeQuery(requete);
@@ -135,7 +135,7 @@ public class ModeleUser {
     
     public static void insertUser(User unUser)
     {
-    	String requete ="INSERT INTO users(id, raison_social, nom, prenom, mail, password, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, nb_commande) VALUES ( '"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"', '"+unUser.getNb_commande()+"');";
+    	String requete ="call modeleU_I('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"', '"+unUser.getNb_commande()+"');";
         BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -143,6 +143,7 @@ public class ModeleUser {
             Statement unStat = uneBDD.getMaconnexion().createStatement();
             unStat.execute(requete);
             unStat.close();
+            System.out.println("insertion reussie");
         }
         catch (SQLException exp)
         {
@@ -154,7 +155,7 @@ public class ModeleUser {
     public static int deleteUser(int id)
 	{
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM users WHERE id="+id+";";
+    	String requete="call modeleU_D1('"+id+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -165,7 +166,7 @@ public class ModeleUser {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="DELETE FROM users WHERE id="+id+";";
+            	requete="call modeleU_D2('"+id+"');";
                 unStat.execute(requete);
             }
             unStat.close();
@@ -182,7 +183,7 @@ public class ModeleUser {
     {
     	
     	int nb=0;
-    	String requete="SELECT COUNT(*) FROM users WHERE id="+unUser.getId()+";";
+    	String requete="call modeleU_U1('"+unUser.getId()+"');";
     	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
@@ -193,9 +194,10 @@ public class ModeleUser {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="UPDATE users SET raison_social='"+unUser.getRaison_social()+"', nom='"+unUser.getNom()+"', prenom='"+unUser.getPrenom()+"', mail='"+unUser.getMail()+"', password='"+unUser.getPassword()+"', fadresse1='"+unUser.getFadresse1()+"', fadresse2='"+unUser.getFadresse2()+"', fcp='"+unUser.getFcp()+"', fville='"+unUser.getFville()+"', ladresse1='"+unUser.getLadresse1()+"', ladresse2='"+unUser.getLadresse2()+"', lcp='"+unUser.getLcp()+"', lville='"+unUser.getLville()+"', admin='"+unUser.isAdmin()+"', gestionnaire='"+unUser.isGestionnaire()+"', nb_commande='"+unUser.getNb_commande()+"' WHERE id='"+unUser.getId()+"';";
+            	requete="call modeleU_U2('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"');";
                 unStat.execute(requete);
             }
+            System.out.println("modification reussie");
             unStat.close();
         }
         catch (SQLException exp)

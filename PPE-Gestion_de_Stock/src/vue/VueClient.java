@@ -539,8 +539,6 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									}
 									catch(Exception exp)
 									{
-										ok = false;
-										this.tfPprix_total.setBackground(Color.red);
 									}
 									try{
 										nb_commande =Integer.parseInt(this.tfNbComm.getText());
@@ -548,8 +546,6 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									}
 									catch(Exception exp)
 									{
-										ok = false;
-										this.tfNbComm.setBackground(Color.red);
 									}
 									try{
 										if(ok == true)
