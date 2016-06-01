@@ -86,7 +86,13 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.cbxStats.removeAllItems();
 		this.cbxStats.addItem("");
 		this.cbxStats.addItem("Stats nb commande");
-		this.cbxStats.addItem("users par ordre alphabetique");
+		this.cbxStats.addItem("Users par ordre alphabetique");
+		this.cbxStats.addItem("Article par prix croissant");
+		this.cbxStats.addItem("Article par prix decroissant");
+		this.cbxStats.addItem("Client par nombre de commande croissant");
+		this.cbxStats.addItem("Client par nombre de commande decroissant");
+		this.cbxStats.addItem("Client par nombre d'article croissant");
+		this.cbxStats.addItem("Client par nombre d'article decroissant");
 	}
 	
 	
@@ -167,7 +173,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							case "users par ordre alphabetique" :
+							case "Users par ordre alphabetique" :
 								donnees = ModeleStat.Listerproc1();
 								String titres1[] = {"Id", "Nom", "Prenom", "mail"};
 								this.tabStats.addMouseListener(this);
@@ -177,7 +183,68 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
-							default : break;
+							case "Article par prix croissant" :
+								donnees = ModeleStat.ProcArtPrixASC();
+								String titres2[] = {"Id", "Nom", "Code article", "Prix"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres2);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Article par prix decroissant" :
+								donnees = ModeleStat.ProcArtPrixDESC();
+								String titres3[] = {"Id", "Nom", "Code article", "Prix"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres3);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Client par nombre de commande croissant" :
+								donnees = ModeleStat.ProcArtPrixDESC();
+								String titres4[] = {"Id", "Nom", "Prenom", "Nb commande"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres4);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Client par nombre de commande decroissant" :
+								donnees = ModeleStat.ProcArtPrixDESC();
+								String titres5[] = {"Id", "Nom", "Prenom", "Nb commande"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres5);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Client par nombre d'article croissant" :
+								donnees = ModeleStat.ProcArtPrixDESC();
+								String titres6[] = {"Id", "Nom", "Prenom", "Nb articles"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres6);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							case "Client par nombre d'article decroissant" :
+								donnees = ModeleStat.ProcArtPrixDESC();
+								String titres7[] = {"Id", "Nom", "Prenom", "Nb articles"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres7);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
+							default :
+								break;
 							}
 							
 							
