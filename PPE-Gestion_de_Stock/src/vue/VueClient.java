@@ -79,7 +79,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		
 		//construction du panel menu
 		this.panelMenu.setBounds( 0, 0, 150, 600);
-		this.panelMenu.setBackground(Color.red);
+		this.panelMenu.setBackground(Color.DARK_GRAY);
 		this.panelMenu.setLayout(new GridLayout(7, 1));
 		this.panelMenu.add(new JLabel(""));
 		this.panelMenu.add(this.btArticle);
@@ -92,7 +92,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		
 		//construction du panel bouton
 		this.panelBouton.setBounds(900, 0, 150, 600);
-		this.panelBouton.setBackground(Color.red);
+		this.panelBouton.setBackground(Color.DARK_GRAY);
 		this.panelBouton.setLayout(new GridLayout(7, 1));
 		this.panelBouton.add(new JLabel(""));
 		this.panelBouton.add(this.btAjouter);
@@ -104,7 +104,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		
 		//construction du panel ajouter
 		this.panelAjouter.setBounds(0, 300, 900, 300);
-		this.panelAjouter.setBackground(Color.cyan);
+		this.panelAjouter.setBackground(Color.LIGHT_GRAY);
 		this.panelAjouter.setLayout(new GridLayout(7,4));
 		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfId);
@@ -148,7 +148,7 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		
 		//construction du panel lister
 		this.panelLister.setBounds(0, 0, 900, 300);
-		this.panelLister.setBackground(Color.GRAY);
+		this.panelLister.setBackground(Color.LIGHT_GRAY);
 		this.lbRechercher.setBounds(20, 20, 80, 20);
 		this.tfRecherche.setBounds(100, 20, 640, 20);
 		this.btRechercher.setBounds(760, 20, 120, 20);
@@ -354,23 +354,41 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 							if(e.getSource()==this.btAnnuler)
 							{
 								this.tfId.setText("");
+								this.tfId.setBackground(Color.GRAY);
 								this.tfRaison_social.setText("");
+								this.tfRaison_social.setBackground(Color.WHITE);
 								this.tfNom.setText("");
+								this.tfNom.setBackground(Color.WHITE);
 								this.tfPrenom.setText("");
+								this.tfPrenom.setBackground(Color.WHITE);
 								this.tfMail.setText("");
+								this.tfMail.setBackground(Color.WHITE);
 								this.tfMdp.setText("");
+								this.tfMdp.setBackground(Color.WHITE);
 								this.tfAdresseF1.setText("");
+								this.tfAdresseF1.setBackground(Color.WHITE);
 								this.tfAdresseF2.setText("");
+								this.tfAdresseF2.setBackground(Color.WHITE);
 								this.tfFcp.setText("");
+								this.tfFcp.setBackground(Color.WHITE);
 								this.tfVilleF.setText("");
+								this.tfVilleF.setBackground(Color.WHITE);
 								this.tfAdresseL1.setText("");
+								this.tfAdresseL1.setBackground(Color.WHITE);
 								this.tfAdresseL2.setText("");
+								this.tfAdresseL2.setBackground(Color.WHITE);
 								this.tfLcp.setText("");
+								this.tfLcp.setBackground(Color.WHITE);
 								this.tfVilleL.setText("");
+								this.tfVilleL.setBackground(Color.WHITE);
 								this.Admin.setSelected(false);
+								this.Admin.setBackground(Color.WHITE);
 								this.Gest.setSelected(false);
+								this.Gest.setBackground(Color.WHITE);
 								this.tfPprix_total.setText("");
+								this.tfPprix_total.setBackground(Color.WHITE);
 								this.tfNbComm.setText("");
+								this.tfNbComm.setBackground(Color.WHITE);
 							}
 							else
 							{
@@ -405,6 +423,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										raison_sociale = this.tfRaison_social.getText();
 										this.tfRaison_social.setBackground(Color.white);
+										if(raison_sociale.length()==0)
+										{
+											ok = false;
+											this.tfRaison_social.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -414,6 +437,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										nom=this.tfNom.getText();
 										this.tfNom.setBackground(Color.white);
+										if(nom.length()==0)
+										{
+											ok = false;
+											this.tfNom.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -423,6 +451,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										prenom=this.tfPrenom.getText();
 										this.tfPrenom.setBackground(Color.white);
+										if(prenom.length()==0)
+										{
+											ok = false;
+											this.tfPrenom.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -432,6 +465,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										mail=this.tfMail.getText();
 										this.tfMail.setBackground(Color.white);
+										if(mail.length()==0)
+										{
+											ok = false;
+											this.tfMail.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -441,6 +479,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										mot_de_passe=this.tfMdp.getText();
 										this.tfMdp.setBackground(Color.white);
+										if(mot_de_passe.length()==0)
+										{
+											ok = false;
+											this.tfMdp.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -450,6 +493,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										fadresse1=this.tfAdresseF1.getText();
 										this.tfAdresseF1.setBackground(Color.white);
+										if(fadresse1.length()==0)
+										{
+											ok = false;
+											this.tfAdresseF1.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -459,6 +507,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										fadresse2=this.tfAdresseF2.getText();
 										this.tfAdresseF2.setBackground(Color.white);
+										if(fadresse2.length()==0)
+										{
+											ok = false;
+											this.tfAdresseF2.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -468,6 +521,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										fcp =this.tfFcp.getText();
 										this.tfFcp.setBackground(Color.white);
+										if(fcp.length()==0)
+										{
+											ok = false;
+											this.tfFcp.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -477,6 +535,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										fville =this.tfVilleF.getText();
 										this.tfVilleF.setBackground(Color.white);
+										if(fville.length()==0)
+										{
+											ok = false;
+											this.tfVilleF.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -486,6 +549,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										ladresse1=this.tfAdresseL1.getText();
 										this.tfAdresseL1.setBackground(Color.white);
+										if(ladresse1.length()==0)
+										{
+											ok = false;
+											this.tfAdresseL1.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -495,6 +563,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										ladresse2=this.tfAdresseL2.getText();
 										this.tfAdresseL2.setBackground(Color.white);
+										if(ladresse2.length()==0)
+										{
+											ok = false;
+											this.tfAdresseL2.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -504,6 +577,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										lcp =this.tfLcp.getText();
 										this.tfLcp.setBackground(Color.white);
+										if(lcp.length()==0)
+										{
+											ok = false;
+											this.tfLcp.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{
@@ -513,6 +591,11 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 									try{
 										lville =this.tfVilleL.getText();
 										this.tfVilleL.setBackground(Color.white);
+										if(lville.length()==0)
+										{
+											ok = false;
+											this.tfVilleL.setBackground(Color.red);
+										}
 									}
 									catch(Exception exp)
 									{

@@ -68,7 +68,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		
 		//construction du panel menu
 		this.panelMenu.setBounds( 0, 0, 150, 600);
-		this.panelMenu.setBackground(Color.red);
+		this.panelMenu.setBackground(Color.DARK_GRAY);
 		this.panelMenu.setLayout(new GridLayout(7, 1));
 		this.panelMenu.add(new JLabel(""));
 		this.panelMenu.add(this.btArticle);
@@ -80,7 +80,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		
 		//construction du panel boutons
 		this.panelBouton.setBounds(900, 0, 150, 600);
-		this.panelBouton.setBackground(Color.red);
+		this.panelBouton.setBackground(Color.DARK_GRAY);
 		this.panelBouton.setLayout(new GridLayout(7, 1));
 		this.panelBouton.add(new JLabel(""));
 		this.panelBouton.add(this.btAjouter);
@@ -93,7 +93,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 		
 		//construction du panel ajouter
 		this.panelAjouter.setBounds(0, 300, 900, 300);
-		this.panelAjouter.setBackground(Color.cyan);
+		this.panelAjouter.setBackground(Color.LIGHT_GRAY);
 		this.panelAjouter.setLayout(new GridLayout(9,2));
 		this.panelAjouter.add(new JLabel("Id :"));
 		this.panelAjouter.add(this.tfId);
@@ -117,7 +117,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 
 		//construction du panel lister
 		this.panelLister.setBounds(0, 0, 900, 300);
-		this.panelLister.setBackground(Color.GRAY);
+		this.panelLister.setBackground(Color.LIGHT_GRAY);
 		this.lbRechercher.setBounds(20, 20, 80, 20);
 		this.tfRecherche.setBounds(100, 20, 640, 20);
 		this.btRechercher.setBounds(760, 20, 120, 20);
@@ -285,13 +285,21 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 							if(e.getSource()==this.btAnnuler)
 							{
 								this.tfId.setText("");
+								this.tfId.setBackground(Color.GRAY);
 								this.tfId_famille.setText("");
+								this.tfId_famille.setBackground(Color.WHITE);
 								this.tfId_sous_famille.setText("");
+								this.tfId_sous_famille.setBackground(Color.WHITE);
 								this.tfNom.setText("");
+								this.tfNom.setBackground(Color.WHITE);
 								this.tfCode_article.setText("");
+								this.tfCode_article.setBackground(Color.WHITE);
 								this.tfDesignation.setText("");
+								this.tfDesignation.setBackground(Color.WHITE);
 								this.tfPrix_unitaire.setText("");
+								this.tfPrix_unitaire.setBackground(Color.WHITE);
 								this.tfQuantite.setText("");
+								this.tfQuantite.setBackground(Color.WHITE);
 							}
 							else
 							{

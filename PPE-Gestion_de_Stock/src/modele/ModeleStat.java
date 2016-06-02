@@ -447,4 +447,35 @@ public class ModeleStat {
         uneBDD.seDeconnecter();
 		return stats;
 	}
+	
+	public static Object[][] ProcStatsVenteNoel()
+	{
+		Object stats[][] = null;
+		String requete = "call procStatsVenteNoel()";
+		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        uneBDD.chargerPilote();
+        try {
+        	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
+            ResultSet unRes = unStat.executeQuery(requete);
+            unRes.last();
+            stats = new Object[unRes.getRow()][3];
+            unRes.beforeFirst();
+            int i = 0;
+            while (unRes.next())
+            {
+            	stats[i][0]=unRes.getInt("id");
+            	stats[i][1]=unRes.getString("nom");
+            	stats[i][2]=unRes.getString("totalArticles");
+            	i++;
+            }
+            unStat.close();
+            unRes.close();
+        }
+        catch (SQLException exp)
+        {
+            System.out.println("Erreur d'execution :"+ exp);
+        }
+        uneBDD.seDeconnecter();
+		return stats;
+	}
 }

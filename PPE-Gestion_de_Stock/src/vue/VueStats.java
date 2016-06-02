@@ -47,7 +47,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		
 		//construction du panel menu
 		this.panelMenu.setBounds( 0, 0, 150, 600);
-		this.panelMenu.setBackground(Color.red);
+		this.panelMenu.setBackground(Color.DARK_GRAY);
 		this.panelMenu.setLayout(new GridLayout(7, 1));
 		this.panelMenu.add(new JLabel(""));
 		this.panelMenu.add(this.btArticle);
@@ -61,7 +61,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		//construction du panel statistique
 		this.panelStats.setBounds(150, 0, 1050, 600);
 		this.panelStats.setLayout(null);
-		this.panelStats.setBackground(Color.GRAY);
+		this.panelStats.setBackground(Color.LIGHT_GRAY);
 		this.scrollStats.setBounds(10, 40, 1000, 500);
 		this.cbxStats.setBounds(10, 10, 1000, 20);
 		this.remplirCbx();
@@ -99,6 +99,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 		this.cbxStats.addItem("Nombre de commandes ce jour");
 		this.cbxStats.addItem("Nombre de commandes ce mois");
 		this.cbxStats.addItem("Les clients ayant depense le plus");
+		this.cbxStats.addItem("Les articles les plus commandés à Noel");
 	}
 	
 	
@@ -309,12 +310,19 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 								this.scrollStats.setVisible(true);
 								this.panelStats.add(scrollStats);
 								break;
+							case "Les articles les plus commandés à Noel":
+								donnees = ModeleStat.ProcStatsVenteNoel();
+								String titres14[] = {"Id", "Nom", "Total d'article"};
+								this.tabStats.addMouseListener(this);
+								dm = new DefaultTableModel(donnees, titres14);
+								this.tabStats.setModel(dm);
+								this.scrollStats.setViewportView(this.tabStats);
+								this.scrollStats.setVisible(true);
+								this.panelStats.add(scrollStats);
+								break;
 							default :
 								break;
-							}
-							
-							
-							
+							}														
 						}
 					}
 				}

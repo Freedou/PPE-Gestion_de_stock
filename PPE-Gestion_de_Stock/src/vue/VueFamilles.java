@@ -62,7 +62,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 		
 		//construction du panel menu
 		this.panelMenu.setBounds( 0, 0, 150, 600);
-		this.panelMenu.setBackground(Color.red);
+		this.panelMenu.setBackground(Color.DARK_GRAY);
 		this.panelMenu.setLayout(new GridLayout(7, 1));
 		this.panelMenu.add(new JLabel(""));
 		this.panelMenu.add(this.btAjouter);
@@ -76,7 +76,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 		//construction du panel ajouter
 		//form famille
 		this.panelAjouter.setBounds(0, 300, 900, 300);
-		this.panelAjouter.setBackground(Color.cyan);
+		this.panelAjouter.setBackground(Color.LIGHT_GRAY);
 		this.panelAjouter.setLayout(new GridLayout(6,4));
 		this.panelAjouter.add(new JLabel(""));
 		this.panelAjouter.add(new JLabel("Famille :"));
@@ -115,7 +115,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 
 		//construction du panel lister
 		this.panelLister.setBounds(0, 0, 900, 300);
-		this.panelLister.setBackground(Color.GRAY);
+		this.panelLister.setBackground(Color.LIGHT_GRAY);
 		this.scrollFamille.setBounds(20, 60, 430, 230);
 		this.scrollSousFamille.setBounds(450, 60, 430, 230);
 		this.panelLister.setLayout(null);
