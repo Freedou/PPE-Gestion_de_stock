@@ -78,7 +78,7 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Bonjour "+tab[0]+" "+tab[1], "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Bonjour, "+tab[0]+" "+tab[1]+".", "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
                     //destruction de l'interface connexion
                     this.dispose();
                     //lancement du menu

@@ -154,7 +154,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	
 	public void appelListe()
 	{
-		String titres[] = {"id", "id_famille", "id_sous_famille", "Nom", "code_article", "Désignation", "Prix_unitaire", "Qantité"};
+		String titres[] = {"Id", "Id famille", "Id sous famille", "Nom", "Code article", "Désignation", "Prix unitaire", "Quantité"};
 		String cle = this.tfRecherche.getText();
 		LinkedList<Article> uneListe = Modele.selectWhere(cle);
 		Object donnees [][] = new Object[uneListe.size()][8];
@@ -416,7 +416,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 										}
 										else
 										{
-											JOptionPane.showMessageDialog(this, "Erreur de saisie veuillez remplir correctement les champs coloré en rouge");
+											JOptionPane.showMessageDialog(this, "Erreur de saisie : Veuillez correctement remplir les champs colorés en rouge.");
 										}
 									}
 									catch(Exception exp)
