@@ -28,7 +28,7 @@ public class VueStats extends JFrame implements ActionListener, MouseListener{
 
 	
 	private JButton btArticle = new JButton("Gérer les articles");
-	private JButton btClients = new JButton("Gerer clients");
+	private JButton btClients = new JButton("Gérer les clients");
 	private JButton btStats = new JButton("Voir statistiques");
 	private JButton btQuitter = new JButton("Quitter");
 	//@SuppressWarnings({"rawtypes"})	

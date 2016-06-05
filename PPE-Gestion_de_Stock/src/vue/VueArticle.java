@@ -33,7 +33,7 @@ public class VueArticle extends JFrame implements ActionListener, MouseListener
 	private JPanel panelBouton=new JPanel();
 	
 	private JButton btArticle = new JButton("Gérer les articles");
-	private JButton btClients = new JButton("Gerer clients");
+	private JButton btClients = new JButton("Gérer les clients");
 	private JButton btStats = new JButton("Voir statistiques");
 	private JButton btQuitter = new JButton("Quitter");
 	

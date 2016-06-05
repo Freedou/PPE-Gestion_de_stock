@@ -36,7 +36,7 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
         
         //placement des objets dans le panel
         this.unPanel.setBounds(0,0,400,200);
-        this.unPanel.setBackground(Color.cyan);
+        this.unPanel.setBackground(Color.gray);
         this.unPanel.setLayout(new GridLayout(5,2));
         this.unPanel.add(new JLabel(""));
         this.unPanel.add(new JLabel(""));
@@ -78,7 +78,7 @@ public class Connexion extends JFrame implements ActionListener, KeyListener
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Bonjour"+tab[0]+" "+tab[1], "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Bonjour "+tab[0]+" "+tab[1], "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
                     //destruction de l'interface connexion
                     this.dispose();
                     //lancement du menu
