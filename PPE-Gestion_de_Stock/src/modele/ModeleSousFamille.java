@@ -14,7 +14,7 @@ public class ModeleSousFamille
 	public static LinkedList<SousFamille> selectAll()
     {
         LinkedList<SousFamille> uneListe = new LinkedList<SousFamille>();
-        BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleSF_SA()";
@@ -47,7 +47,7 @@ public class ModeleSousFamille
     {
         //inserer un produit dans la table SousFamilles
         String requete ="call modeleSF_I('"+unSousFamille.getId()+"','"+unSousFamille.getIdFamille()+"','"+unSousFamille.getNom()+"','"+unSousFamille.getCommentaire()+"');";
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -67,7 +67,7 @@ public class ModeleSousFamille
 	{
     	int nb=0;
     	String requete="call modeleSF_D1('"+id+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -95,7 +95,7 @@ public class ModeleSousFamille
     	
     	int nb=0;
     	String requete="call modeleSF_U1('"+unSousFamille.getId()+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {

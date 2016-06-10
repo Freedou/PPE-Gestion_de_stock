@@ -14,7 +14,7 @@ public class ModeleUser {
 	public static LinkedList<User> selectAll()
     {
         LinkedList<User> uneListe = new LinkedList<User>();
-        BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleU_SA();";
@@ -60,7 +60,7 @@ public class ModeleUser {
     {
         //select where designation etc.
         String [] tab = new String [2];
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleU_SC('"+email+"','"+mdp+"');";  
@@ -94,7 +94,7 @@ public class ModeleUser {
     {
         //select where designation etc.
         LinkedList<User> uneListe = new LinkedList<User>();
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleU_SW('"+cle+"');";  
@@ -139,7 +139,7 @@ public class ModeleUser {
     public static void insertUser(User unUser)
     {
     	String requete ="call modeleU_I('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"', '"+unUser.getNb_commande()+"');";
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -159,7 +159,7 @@ public class ModeleUser {
 	{
     	int nb=0;
     	String requete="call modeleU_D1('"+id+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -187,7 +187,7 @@ public class ModeleUser {
     	
     	int nb=0;
     	String requete="call modeleU_U1('"+unUser.getId()+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {

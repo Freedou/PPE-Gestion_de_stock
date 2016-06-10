@@ -10,7 +10,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procedureTest1()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -43,7 +43,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procedure1()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -75,7 +75,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcArtPrixASC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -107,7 +107,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcArtPrixDESC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -139,7 +139,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcUsrNbCommASC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -171,7 +171,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcUsrNbCommDESC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -203,7 +203,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcUsrNbArtASC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -235,7 +235,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call ProcUsrNbArtDESC()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -267,7 +267,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procArtPlusComm()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -298,7 +298,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procClientsOk()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -329,7 +329,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procClientsPasOk()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -360,7 +360,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procNbCommJour()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -390,7 +390,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procNbCommMois()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -420,7 +420,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procUsrPlusDepense()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();
@@ -452,7 +452,7 @@ public class ModeleStat {
 	{
 		Object stats[][] = null;
 		String requete = "call procStatsVenteNoel()";
-		BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+		BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         try {
         	uneBDD.seConnecter();Statement unStat = uneBDD.getMaconnexion().createStatement();

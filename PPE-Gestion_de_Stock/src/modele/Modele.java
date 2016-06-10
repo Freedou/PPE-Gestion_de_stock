@@ -14,7 +14,7 @@ public class Modele {
     public static LinkedList<Article> selectAll()
     {
         LinkedList<Article> uneListe = new LinkedList<Article>();
-        BDD uneBDD = new BDD("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleA_SA();";
@@ -51,7 +51,7 @@ public class Modele {
     {
         //inserer un produit dans la table articles
         String requete ="call modeleA_I('"+unArticle.getId_famille()+"','"+unArticle.getId_sous_famille()+"','"+unArticle.getNom()+"','"+unArticle.getCode_article()+"','"+unArticle.getDesignation()+"','"+unArticle.getPrix_unitaire()+"','"+unArticle.getQuantite()+"','"+unArticle.getId()+"');";
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -71,7 +71,7 @@ public class Modele {
     {
         //select where designation etc.
         LinkedList<Article> uneListe = new LinkedList<Article>();
-        BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+        BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         String requete ="call modeleA_SW('"+cle+"');";  
@@ -108,7 +108,7 @@ public class Modele {
 	{
     	int nb=0;
     	String requete="call modeleA_D1('"+id+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
@@ -136,7 +136,7 @@ public class Modele {
     	
     	int nb=0;
     	String requete="call modeleA_U1('"+unArticle.getId()+"');";
-    	BDD uneBDD = new BDD ("localhost", "filelec", "root", "");
+    	BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
         try {
