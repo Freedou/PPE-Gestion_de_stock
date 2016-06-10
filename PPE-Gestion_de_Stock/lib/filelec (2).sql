@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 02 Juin 2016 à 15:24
+-- Généré le :  Ven 10 Juin 2016 à 22:16
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -40,7 +40,7 @@ end$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleA_I`(IN idF int, IN idSF int, IN nomA varchar(255), IN codeA varchar(255), IN designationA varchar(255), IN prixU decimal, IN quantiteA int, IN idA int)
 begin
 INSERT INTO articles(id, id_famille, id_sous_famille, nom, code_article, designation, prix_unitaire, quantite) 
-VALUES (idA, idF, idSF, nomA, codeA, designationA, prixU, quantiteA);
+VALUES ("", idF, idSF, nomA, codeA, designationA, prixU, quantiteA);
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleA_SA`()
@@ -93,7 +93,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleF_I`(IN idF VARCHAR(255), IN nomF VARCHAR(255), IN commF VARCHAR(255))
 BEGIN
 INSERT INTO Familles(id, nom, commentaire) 
-VALUES (idF, nomF, commF);
+VALUES ("", nomF, commF);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleF_SA`()
@@ -132,7 +132,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleSF_I`(IN idSF INT(3), IN idF INT(3), IN nomSF VARCHAR(255), IN commSF VARCHAR(255))
 BEGIN
 INSERT INTO sous_familles(id, id_famille, nom, commentaire) 
-VALUES (idSF,idF,nomSF,commSF);
+VALUES ("",idF,nomSF,commSF);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleSF_SA`()
@@ -175,7 +175,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleU_I`(idU int, RS varchar(255)
 	adminn varchar(255), gestionnairre varchar(255), nbcommande int)
 begin
 INSERT INTO users(id, raison_sociale, nom, prenom, mail, mot_de_passe, fadresse1, fadresse2, fcp, fville, ladresse1, ladresse2, lcp, lville, admin, gestionnaire, nb_commande) 
-VALUES (idU, RS, nomU, 
+VALUES ("", RS, nomU, 
 	prenomU, email, mdpd, 
 	factad1, factad2, factcp, factville, 
 	livadresse1, livadresse2, livcp, livville, 
@@ -212,11 +212,7 @@ FROM users
 WHERE id=idU;
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleU_U2`(IN idU INT, IN RS VARCHAR(255), 
-IN nomU VARCHAR(255), IN prenomU VARCHAR(255), IN email VARCHAR(255), 
-IN mdp VARCHAR(255), IN factad1 VARCHAR(255), IN factad2 VARCHAR(255),
-IN factcp VARCHAR(255), IN factville VARCHAR(255), IN livadresse1 VARCHAR(255), 
-IN livadresse2 VARCHAR(255), IN livcp VARCHAR(255), IN livville VARCHAR(255), IN adminn VARCHAR(255), IN gestionnairre VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modeleU_U2`(IN idU INT, IN RS VARCHAR(255), IN nomU VARCHAR(255), IN prenomU VARCHAR(255), IN email VARCHAR(255), IN mdp VARCHAR(255), IN factad1 VARCHAR(255), IN factad2 VARCHAR(255), IN factcp VARCHAR(255), IN factville VARCHAR(255), IN livadresse1 VARCHAR(255), IN livadresse2 VARCHAR(255), IN livcp VARCHAR(255), IN livville VARCHAR(255), IN adminn VARCHAR(255), IN gestionnairre VARCHAR(255))
 begin
 UPDATE users SET raison_sociale=RS, 
 nom=nomU, 
@@ -366,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   KEY `IX_articles_id_famille` (`id_famille`),
   KEY `IX_articles_id_sous_famille` (`id_sous_famille`),
   KEY `IX_articles_nom` (`nom`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=1024 AUTO_INCREMENT=128 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=1024 AUTO_INCREMENT=129 ;
 
 --
 -- Contenu de la table `articles`
@@ -423,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `familles` (
   `commentaire` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_familles_nom` (`nom`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=4096 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=4096 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `familles`
@@ -432,7 +428,8 @@ CREATE TABLE IF NOT EXISTS `familles` (
 INSERT INTO `familles` (`id`, `nom`, `commentaire`) VALUES
 (1, 'Outillage mécanique pour automobile', ' '),
 (2, 'Pneumatique', ' '),
-(3, 'Manutention et levage', ' ');
+(3, 'Manutention et levage', ' '),
+(7, 'joPedro', 'vasy dit lui');
 
 -- --------------------------------------------------------
 
@@ -530,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `sous_familles` (
   `commentaire` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_sous_familles_id_sous_famille` (`id_famille`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=1489 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=1489 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `sous_familles`
@@ -586,15 +583,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `UK_users_mail` (`mail`),
   KEY `IX_users_mot_de_passe` (`mot_de_passe`),
   KEY `IX_users_nom` (`nom`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=2048 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=2048 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `raison_sociale`, `nom`, `prenom`, `mail`, `mot_de_passe`, `fadresse1`, `fadresse2`, `fcp`, `fville`, `ladresse1`, `ladresse2`, `lcp`, `lville`, `admin`, `gestionnaire`, `panier_prix_total`, `nb_commande`) VALUES
-(1, '123', 'HA', 'AA', 'zeee@lol.fr', '123', '', '', '', '', '', '', '', '', 1, 1, '807.00', 19),
-(3, '432', 'HAUTIER', 'JULIEN', 'vijuh@hotmail.fr', '123', '3 rue Pierre Haret', '', '75009', 'PARIS', '', '', '', '', 0, 0, '24.00', 0);
+(1, '123', 'HA', 'AA', 'zeee@lol.fr', '123', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 1, 1, '807.00', 19),
+(3, '432', 'HAUTIER', 'JULIEN', 'vijuh@hotmail.fr', '123', '3 rue Pierre Haret', '', '75009', 'PARIS', '', '', '', '', 0, 0, '24.00', 0),
+(8, '222', 'lele', 'letest', 'letest@lol.fr', '123', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 1, 1, '0.00', 0);
 
 -- --------------------------------------------------------
 
