@@ -336,7 +336,7 @@ public class VueFamilles extends JFrame implements ActionListener, MouseListener
 						}
 						catch(Exception exp)
 						{
-							okF = false;
+							okSF = false;
 							this.tfIdFamille.setBackground(Color.red);
 						}
 						try{

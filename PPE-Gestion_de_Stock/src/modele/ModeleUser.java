@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import controleur.User;
 
 public class ModeleUser {
@@ -194,10 +197,10 @@ public class ModeleUser {
         	nb = unRes.getInt(1);
             if(nb > 0)
             {
-            	requete="call modeleU_U2('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"');";
+            	requete="call modeleU_U2('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', "+unUser.isAdmin()+", "+unUser.isGestionnaire()+");";
                 unStat.execute(requete);
             }
-            System.out.println("modification reussie");
+            JOptionPane.showMessageDialog(null, "Modification réussi !");
             unStat.close();
         }
         catch (SQLException exp)

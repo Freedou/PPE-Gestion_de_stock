@@ -259,11 +259,15 @@ public class VueClient extends JFrame implements ActionListener, MouseListener{
 		      {
 		    	  this.Admin.setSelected(true);
 			      this.Admin.setBackground(Color.white);
+		      }else{
+		    	  this.Admin.setSelected(false);
 		      }
 		      if(this.tabClient.getValueAt(row, 15).equals(true))
 		      {
 		    	  this.Gest.setSelected(true);
 			      this.Gest.setBackground(Color.white);
+		      }else{
+		    	  this.Gest.setSelected(false);
 		      }
 		      this.tfPprix_total.setText(this.tabClient.getValueAt(row, 16)+"");
 		      this.tfPprix_total.setBackground(Color.white);
