@@ -138,7 +138,7 @@ public class ModeleUser {
     
     public static void insertUser(User unUser)
     {
-    	String requete ="call modeleU_I('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', '"+unUser.isAdmin()+"', '"+unUser.isGestionnaire()+"', '"+unUser.getNb_commande()+"');";
+    	String requete ="call modeleU_I('"+unUser.getId()+"', '"+unUser.getRaison_social()+"', '"+unUser.getNom()+"', '"+unUser.getPrenom()+"', '"+unUser.getMail()+"', '"+unUser.getPassword()+"', '"+unUser.getFadresse1()+"', '"+unUser.getFadresse2()+"', '"+unUser.getFcp()+"', '"+unUser.getFville()+"', '"+unUser.getLadresse1()+"', '"+unUser.getLadresse2()+"', '"+unUser.getLcp()+"', '"+unUser.getLville()+"', "+unUser.isAdmin()+", "+unUser.isGestionnaire()+", '"+unUser.getNb_commande()+"');";
         BDD uneBDD = new BDD("dyndns.freedou.fr", "filelec", "root", "bagdad");
         uneBDD.chargerPilote();
         uneBDD.seConnecter();
